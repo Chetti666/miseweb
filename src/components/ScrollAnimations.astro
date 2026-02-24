@@ -1,0 +1,57 @@
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduceMotion) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.fromTo(
+      '[data-hero-title]',
+      { y: 36, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.1, ease: 'power3.out' }
+    );
+
+    document.querySelectorAll('[data-reveal]').forEach((target, index) => {
+      gsap.fromTo(
+        target,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          delay: index * 0.05,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: target,
+            start: 'top 84%'
+          }
+        }
+      );
+    });
+
+    gsap.to('[data-parallax]', {
+      yPercent: -12,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '[data-parallax-wrap]',
+        scrub: true,
+        start: 'top bottom',
+        end: 'bottom top'
+      }
+    });
+
+    const featuredPin = document.querySelector('[data-featured-pin]');
+
+    if (featuredPin) {
+      ScrollTrigger.create({
+        trigger: featuredPin,
+        pin: true,
+        start: 'top 18%',
+        end: '+=280',
+        scrub: 0.8
+      });
+    }
+  }
+</script>

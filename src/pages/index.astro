@@ -1,0 +1,86 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import ScrollAnimations from '../components/ScrollAnimations.astro';
+---
+
+<MainLayout
+  title="CG Motion Studio | Edicion de video y diseno para marcas"
+  description="Web de presentacion para estudio creativo especializado en edicion de video, identidad visual y contenido para marcas."
+>
+  <section class="section-shell grid min-h-[80vh] items-center gap-10 py-20 md:grid-cols-[1.15fr_0.85fr]" data-parallax-wrap>
+    <div class="space-y-8" data-parallax>
+      <span class="chip" data-reveal>Video Editing + Visual Design</span>
+      <h1 class="section-title max-w-2xl text-5xl leading-[0.95] text-white md:text-7xl" data-hero-title>
+        Transformamos ideas en piezas visuales que venden.
+      </h1>
+      <p class="max-w-xl text-lg text-white/80" data-reveal>
+        Produccion de reels, anuncios y contenido digital con direccion creativa, narrativa dinamica y foco
+        en resultados para marcas y profesionales.
+      </p>
+      <div class="flex flex-wrap gap-3" data-reveal>
+        <a href="/contacto" class="rounded-full bg-accent px-6 py-3 font-semibold text-base transition hover:brightness-110">
+          Solicitar propuesta
+        </a>
+        <a href="/portfolio" class="rounded-full border border-white/25 px-6 py-3 text-white transition hover:bg-white/10">
+          Ver portafolio
+        </a>
+      </div>
+    </div>
+
+    <article class="glass-card grid aspect-[9/16] max-h-[600px] place-items-center p-8 text-center" data-reveal>
+      <img src="/media/logo_blanco.png" alt="CG Motion Studio" class="mx-auto mb-6 w-36" loading="lazy" />
+      <p class="text-white/70">
+        Reel principal en actualizacion. Aqui iremos integrando clips livianos por secciones y overscroll.
+      </p>
+    </article>
+  </section>
+
+  <section class="section-shell py-16" data-reveal>
+    <div class="grid gap-6 md:grid-cols-3">
+      <article class="glass-card p-6">
+        <p class="text-4xl font-bold text-accent">+240%</p>
+        <h2 class="mt-4 font-display text-2xl text-white">Engagement</h2>
+        <p class="mt-2 text-white/75">Mejora media en campanas de video social para clientes de nicho lifestyle.</p>
+      </article>
+      <article class="glass-card p-6">
+        <p class="text-4xl font-bold text-accent-2">72h</p>
+        <h2 class="mt-4 font-display text-2xl text-white">Entrega agile</h2>
+        <p class="mt-2 text-white/75">Flujo de trabajo rapido para lanzamientos, eventos y contenido always-on.</p>
+      </article>
+      <article class="glass-card p-6">
+        <p class="text-4xl font-bold text-white">360+</p>
+        <h2 class="mt-4 font-display text-2xl text-white">Direccion integral</h2>
+        <p class="mt-2 text-white/75">Concepto visual, edicion, motion graphics y supervision de identidad de marca.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-shell py-20" data-reveal>
+    <div class="mb-8 flex items-end justify-between gap-4">
+      <div>
+        <span class="chip">Servicios</span>
+        <h2 class="section-title mt-4 text-white">Que hacemos</h2>
+      </div>
+      <a href="/servicios" class="text-white/80 underline decoration-accent underline-offset-6 hover:text-white">
+        Ver detalle completo
+      </a>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-3">
+      <article class="glass-card p-6">
+        <h3 class="font-display text-2xl text-white">Reels y anuncios</h3>
+        <p class="mt-3 text-white/75">Piezas para paid media y organic content con ritmo, hooks y estructura de conversion.</p>
+      </article>
+      <article class="glass-card p-6">
+        <h3 class="font-display text-2xl text-white">Brand motion</h3>
+        <p class="mt-3 text-white/75">Animacion de logotipos, identidades y sistemas visuales para elevar la marca.</p>
+      </article>
+      <article class="glass-card p-6">
+        <h3 class="font-display text-2xl text-white">Direccion de contenido</h3>
+        <p class="mt-3 text-white/75">Planificacion de calendario visual y lineamientos para mantener coherencia creativa.</p>
+      </article>
+    </div>
+  </section>
+
+  <ScrollAnimations />
+</MainLayout>
