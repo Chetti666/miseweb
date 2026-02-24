@@ -27,7 +27,7 @@ const currentPath = normalizePath(Astro.url.pathname);
             <a
               href={link.href}
               class:list={[
-                'relative z-10 rounded-full px-4 py-2 text-sm transition',
+                'relative z-10 rounded-full px-4 py-2 text-m transition',
                 currentPath === normalizePath(link.href)
                   ? 'font-semibold text-[#07111f]'
                   : 'text-white/85 hover:bg-white/10 hover:text-white'
