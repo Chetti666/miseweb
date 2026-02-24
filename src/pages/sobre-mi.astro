@@ -1,16 +1,17 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import ScrollAnimations from '../components/ScrollAnimations.astro';
 ---
 
 <MainLayout title="Sobre mi | CG Motion Studio" description="Perfil profesional y enfoque creativo de CG Motion Studio.">
-  <section class="section-shell grid gap-10 py-18 md:grid-cols-[0.8fr_1.2fr] md:py-24">
-    <article class="glass-card overflow-hidden">
+  <section class="section-shell grid gap-10 py-18 md:grid-cols-[0.8fr_1.2fr] md:py-24" data-page-enter>
+    <article class="glass-card overflow-hidden" data-reveal>
       <img src="/media/logo_blanco.svg" alt="Logo del estudio" class="h-full w-full bg-surface p-14 object-contain" loading="lazy" />
     </article>
 
-    <div class="space-y-6">
-      <span class="chip">Sobre mi</span>
-      <h1 class="section-title text-white">Editor y disenador visual enfocado en marcas que quieren crecer con contenido premium.</h1>
+    <div class="space-y-6" data-page-enter>
+      <span class="chip" data-reveal>Sobre mi</span>
+      <h1 class="section-title text-white" data-hero-title>Editor y disenador visual enfocado en marcas que quieren crecer con contenido premium.</h1>
       <p class="text-lg text-white/75">
         Trabajo entre estrategia y ejecucion: traduzco objetivos comerciales en piezas audiovisuales memorables.
         Mi metodologia combina narrativa, direccion de arte y edicion orientada a resultados.
@@ -22,4 +23,6 @@ import MainLayout from '../layouts/MainLayout.astro';
       <a href="/contacto" class="inline-flex rounded-full bg-accent px-6 py-3 font-semibold transition hover:brightness-110">Trabajemos juntos</a>
     </div>
   </section>
+
+  <ScrollAnimations />
 </MainLayout>

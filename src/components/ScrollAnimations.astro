@@ -7,11 +7,27 @@
   if (!reduceMotion) {
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.fromTo(
-      '[data-hero-title]',
-      { y: 36, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.1, ease: 'power3.out' }
-    );
+    const pageEnterTargets = document.querySelectorAll('[data-page-enter]');
+
+    if (pageEnterTargets.length) {
+      gsap.fromTo(
+        pageEnterTargets,
+        { y: 24, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.85,
+          ease: 'power2.out',
+          stagger: 0.12
+        }
+      );
+    }
+
+    const heroTitle = document.querySelector('[data-hero-title]');
+
+    if (heroTitle) {
+      gsap.fromTo(heroTitle, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: 'power3.out' });
+    }
 
     document.querySelectorAll('[data-reveal]').forEach((target, index) => {
       gsap.fromTo(
@@ -31,16 +47,21 @@
       );
     });
 
-    gsap.to('[data-parallax]', {
-      yPercent: -12,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '[data-parallax-wrap]',
-        scrub: true,
-        start: 'top bottom',
-        end: 'bottom top'
-      }
-    });
+    const parallaxTarget = document.querySelector('[data-parallax]');
+    const parallaxWrap = document.querySelector('[data-parallax-wrap]');
+
+    if (parallaxTarget && parallaxWrap) {
+      gsap.to(parallaxTarget, {
+        yPercent: -12,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: parallaxWrap,
+          scrub: true,
+          start: 'top bottom',
+          end: 'bottom top'
+        }
+      });
+    }
 
     const featuredPin = document.querySelector('[data-featured-pin]');
 

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tailwind-animations";
 
 :root {
   --font-display: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;

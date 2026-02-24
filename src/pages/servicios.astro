@@ -1,5 +1,6 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import ScrollAnimations from '../components/ScrollAnimations.astro';
 
 const services = [
   {
@@ -20,16 +21,16 @@ const process = ['Brief y estrategia', 'Guion visual', 'Edicion y motion', 'Revi
 ---
 
 <MainLayout title="Servicios | CG Motion Studio" description="Servicios de edicion de video y direccion creativa para marcas y profesionales.">
-  <section class="section-shell py-18 md:py-24">
-    <span class="chip">Servicios</span>
-    <h1 class="section-title mt-6 max-w-3xl text-white">Servicios pensados para marcas que necesitan contenido constante y diferencial.</h1>
+  <section class="section-shell py-10 md:py-6" data-page-enter>
+    <span class="chip" data-reveal>Servicios</span>
+    <h1 class="section-title mt-4 max-w-4xl text-white" data-hero-title>Servicios pensados para marcas que necesitan contenido constante y diferencial.</h1>
   </section>
 
-  <section class="section-shell grid gap-6 pb-14 md:grid-cols-3">
+  <section class="section-shell grid gap-6 pb-14 md:grid-cols-3" data-page-enter>
     {services.map((service) => (
-      <article class="glass-card p-6">
+      <article class="glass-card p-4" data-reveal>
         <h2 class="font-display text-2xl text-white">{service.name}</h2>
-        <ul class="mt-4 space-y-2 text-white/75">
+        <ul class="mt-2 space-y-2 text-white/75">
           {service.bullets.map((bullet) => (
             <li>- {bullet}</li>
           ))}
@@ -38,9 +39,9 @@ const process = ['Brief y estrategia', 'Guion visual', 'Edicion y motion', 'Revi
     ))}
   </section>
 
-  <section class="section-shell pb-20">
-    <article class="glass-card p-8 md:p-10">
-      <p class="text-sm uppercase tracking-[0.2em] text-accent">Proceso</p>
+  <section class="section-shell pb-24" data-page-enter>
+    <article class="glass-card p-6 md:p-6" data-reveal="">
+      <p class="text-m font-semibold uppercase tracking-[0.2em] text-accent">Proceso</p>
       <ol class="mt-5 grid gap-3 md:grid-cols-5">
         {process.map((step, index) => (
           <li class="rounded-2xl border border-white/12 bg-white/5 p-4 text-center text-sm text-white/85">
@@ -51,4 +52,6 @@ const process = ['Brief y estrategia', 'Guion visual', 'Edicion y motion', 'Revi
       </ol>
     </article>
   </section>
+
+  <ScrollAnimations />
 </MainLayout>

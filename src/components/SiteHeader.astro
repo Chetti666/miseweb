@@ -7,7 +7,8 @@ const links = [
   { href: '/contacto', label: 'Contacto' }
 ];
 
-const currentPath = Astro.url.pathname;
+const normalizePath = (path: string) => (path !== '/' && path.endsWith('/') ? path.slice(0, -1) : path);
+const currentPath = normalizePath(Astro.url.pathname);
 ---
 
 <header class="sticky top-0 z-50 border-b border-white/10 backdrop-blur-xl">
@@ -19,13 +20,16 @@ const currentPath = Astro.url.pathname;
     <nav aria-label="Principal">
       <ul class="hidden items-center gap-2 md:flex">
         {links.map((link) => (
-          <li>
+          <li class="relative">
+            {currentPath === normalizePath(link.href) && (
+              <span class="pointer-events-none absolute inset-0 rounded-full bg-white shadow-[0_10px_24px_rgba(255,255,255,0.22)] animate-zoom-in"></span>
+            )}
             <a
               href={link.href}
               class:list={[
-                'rounded-full px-4 py-2 text-sm transition',
-                currentPath === link.href
-                  ? 'bg-white text-ink'
+                'relative z-10 rounded-full px-4 py-2 text-sm transition',
+                currentPath === normalizePath(link.href)
+                  ? 'font-semibold text-[#07111f]'
                   : 'text-white/85 hover:bg-white/10 hover:text-white'
               ]}
             >
@@ -45,8 +49,8 @@ const currentPath = Astro.url.pathname;
                 href={link.href}
                 class:list={[
                   'block rounded-xl px-3 py-2 text-sm transition',
-                  currentPath === link.href
-                    ? 'bg-white text-ink'
+                  currentPath === normalizePath(link.href)
+                    ? 'bg-white font-semibold text-[#0a1322] ring-1 ring-white/60 shadow-[0_8px_22px_rgba(255,255,255,0.28)]'
                     : 'text-white/85 hover:bg-white/10 hover:text-white'
                 ]}
               >

@@ -1,15 +1,16 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import ScrollAnimations from '../components/ScrollAnimations.astro';
 ---
 
 <MainLayout title="Contacto | CG Motion Studio" description="Contacta al estudio para cotizar edicion de video y direccion creativa.">
-  <section class="section-shell py-18 md:py-24">
-    <span class="chip">Contacto</span>
-    <h1 class="section-title mt-6 max-w-3xl text-white">Cuentame tu proyecto y en 24 horas te envio una propuesta inicial.</h1>
+  <section class="section-shell py-14 md:py-12" data-page-enter>
+    <span class="chip" data-reveal>Contacto</span>
+    <h1 class="section-title mt-6 max-w-3xl text-white" data-hero-title>Cuentame tu proyecto y en 24 horas te envio una propuesta inicial.</h1>
   </section>
 
-  <section class="section-shell grid gap-8 pb-20 md:grid-cols-[1.2fr_0.8fr]">
-    <form class="glass-card grid gap-4 p-6 md:p-8" action="#" method="post">
+  <section class="section-shell grid gap-8 pb-20 md:grid-cols-[1.2fr_0.8fr]" data-page-enter>
+    <form class="glass-card grid gap-4 p-6 md:p-8" action="#" method="post" data-reveal>
       <label class="text-sm text-white/80">Nombre
         <input type="text" name="nombre" class="mt-2 w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none placeholder:text-white/35 focus:border-[var(--color-accent)]" placeholder="Tu nombre" />
       </label>
@@ -29,7 +30,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       <button type="submit" class="mt-2 rounded-full bg-accent px-5 py-3 font-semibold text-left transition hover:brightness-110">Enviar briefing</button>
     </form>
 
-    <aside class="space-y-4">
+    <aside class="space-y-4" data-reveal>
       <article class="glass-card p-6">
         <h2 class="font-display text-2xl text-white">Contacto directo</h2>
         <p class="mt-2 text-white/75">hello@cgmotion.studio</p>
@@ -44,4 +45,6 @@ import MainLayout from '../layouts/MainLayout.astro';
       </article>
     </aside>
   </section>
+
+  <ScrollAnimations />
 </MainLayout>
