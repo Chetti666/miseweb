@@ -1,14 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tailwind-animations";
 
 :root {
-  --font-display: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
+  --font-display: "Bebas Neue", "Avenir Next", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Consolas", monospace;
   --font-sans: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
   --color-base: #090f1a;
   --color-surface: #121b2b;
   --color-accent: #53e1d1;
   --color-accent-2: #f2b66d;
   --color-ink: #f3f8ff;
+  --color-ink-dim: rgba(243, 248, 255, 0.5);
   color-scheme: dark;
 }
 
@@ -25,9 +28,42 @@ body {
 body {
   font-family: var(--font-sans);
   background:
-    radial-gradient(circle at 82% 18%, rgb(83 225 209 / 0.2), transparent 32%),
-    radial-gradient(circle at 12% 78%, rgb(242 182 109 / 0.15), transparent 30%),
+    radial-gradient(circle at 82% 18%, rgb(83 225 209 / 0.15), transparent 32%),
+    radial-gradient(circle at 12% 78%, rgb(242 182 109 / 0.12), transparent 30%),
     linear-gradient(160deg, #070b14 0%, #101a2b 100%);
+}
+
+.timeline-bar {
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-2) 50%, var(--color-accent) 100%);
+  background-size: 200% 100%;
+  animation: timeline-scroll 3s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes timeline-scroll {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.waveform-bar {
+  width: 3px;
+  background: linear-gradient(to top, var(--color-accent), var(--color-accent-2));
+  border-radius: 2px;
+  animation: waveform-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes waveform-pulse {
+  0%, 100% { transform: scaleY(0.3); opacity: 0.4; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+.frame-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  opacity: 0.7;
 }
 
 .noise-layer {
@@ -47,28 +83,30 @@ body {
 
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(1.9rem, 4vw, 3.2rem);
-  line-height: 1.04;
-  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .glass-card {
-  border: 1px solid rgb(255 255 255 / 0.12);
-  background: linear-gradient(140deg, rgb(255 255 255 / 0.11), rgb(255 255 255 / 0.04));
-  backdrop-filter: blur(8px);
-  border-radius: 1.2rem;
+  background: linear-gradient(135deg, rgba(255 255 255 / 0.03), rgba(255 255 255 / 0.01));
+  backdrop-filter: blur(20px);
+  border-radius: 0.75rem;
+  position: relative;
 }
 
 .chip {
   display: inline-flex;
   align-items: center;
   border-radius: 9999px;
-  border: 1px solid rgb(255 255 255 / 0.18);
   padding: 0.3rem 0.78rem;
   font-size: 0.74rem;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 0.86);
+  color: var(--color-accent);
+  background: rgba(83 225 209 / 0.08);
 }
 
 .font-display {
@@ -93,7 +131,10 @@ body {
 
 .bg-accent {
   background-color: var(--color-accent);
-  color: #041018;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
 }
 
 .decoration-accent {

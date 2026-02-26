@@ -14,33 +14,33 @@ const projects = [
 
 <MainLayout title="Portafolio | CG Motion Studio" description="Seleccion de proyectos de edicion de video, motion y contenido comercial.">
   <section class="section-shell py-12 md:py-12">
-    <span class="chip" data-reveal>Portafolio</span>
+    <span class="chip" data-reveal>PORTAFOLIO</span>
     <h1 class="section-title mt-6 max-w-3xl text-white" data-hero-title>
       Historias visuales disenadas para captar atencion y convertir.
     </h1>
   </section>
 
   <section class="section-shell pb-20">
-    <article class="glass-card mb-10 grid gap-8 p-6 md:grid-cols-[1fr_1.2fr] md:p-10" data-featured-pin>
+    <div class="mb-10 grid gap-8 p-6 md:grid-cols-[1fr_1.2fr] md:p-10 bg-white/[0.02] rounded-lg backdrop-blur-sm" data-featured-pin>
       <div>
-        <p class="text-sm uppercase tracking-[0.2em] text-accent">Proyecto destacado</p>
+        <p class="text-xs font-mono uppercase tracking-[0.2em] text-accent">Proyecto destacado</p>
         <h2 class="mt-3 font-display text-4xl text-white">REEL 2025 / Campana integral</h2>
-        <p class="mt-4 text-white/75">Montaje vertical con narrativa por bloques, tipografia cinetica y transiciones ritmicas para marcas en crecimiento.</p>
+        <p class="mt-4 text-sm font-mono text-white/50">Montaje vertical con narrativa por bloques, tipografia cinetica y transiciones ritmicas para marcas en crecimiento.</p>
       </div>
-      <div class="grid min-h-[360px] place-items-center rounded-2xl border border-white/15 bg-white/5 p-8 text-center">
-        <img src="/media/logo_negro.svg" alt="Preview de proyecto" class="mb-5 w-32" loading="lazy" />
-        <p class="max-w-xs text-white/70">Preview temporal. Se reemplazara por clips fraccionados optimizados para web.</p>
+      <div class="grid min-h-[360px] place-items-center rounded-lg bg-white/[0.02] p-8 text-center">
+        <img src="/media/logo_blanco.svg" alt="Preview de proyecto" class="mb-5 w-32 opacity-60" loading="lazy" />
+        <p class="max-w-xs text-xs font-mono text-white/40">Preview temporal. Se reemplazara por clips fraccionados optimizados para web.</p>
       </div>
-    </article>
+    </div>
 
-    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+    <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
       {projects.map((project) => (
-        <article class="glass-card p-6" data-reveal>
-          <p class="text-xs uppercase tracking-[0.18em] text-white/70">{project.type}</p>
-          <h3 class="mt-3 font-display text-2xl text-white">{project.title}</h3>
-          <p class="mt-4 text-white/75">Resultado: {project.result}</p>
-          <p class="mt-2 text-accent">Look & feel: {project.tone}</p>
-        </article>
+        <div class="p-5 bg-white/[0.02] rounded-lg backdrop-blur-sm hover:bg-white/[0.04] transition-colors" data-reveal>
+          <p class="text-xs font-mono uppercase tracking-[0.15em] text-white/40">{project.type}</p>
+          <h3 class="mt-3 font-display text-xl text-white">{project.title}</h3>
+          <p class="mt-3 text-xs font-mono text-white/50">Resultado: {project.result}</p>
+          <p class="mt-1 text-xs font-mono text-accent">Look & feel: {project.tone}</p>
+        </div>
       ))}
     </div>
   </section>
