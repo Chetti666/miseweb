@@ -18,7 +18,8 @@ Este documento resume el estado actual del proyecto y los puntos pendientes para
 - [x] Limpieza de recurso pesado temporal (video grande removido).
 
 ## 2) Pendientes principales (prioridad alta)
-- [ ] Reemplazar placeholders por clips reales optimizados.
+- [ ] Reemplazar placeholders por clips reales optimizados. (En progreso: recibiendo clips de servicios)
+- [ ] Integrar videos de servicios: Motion Graphics, Produccion Audiovisual, IA, e-learning.
 - [ ] Definir estructura final de videos por seccion (hero, portafolio, overscroll).
 - [ ] Ajustar copy final con mensajes comerciales del cliente.
 - [ ] Conectar formulario de contacto a servicio real (Formspree/Resend/backend).
@@ -66,6 +67,6 @@ Este documento resume el estado actual del proyecto y los puntos pendientes para
 ## Registro rapido de cambios
 > Usa este bloque para ir anotando avances en cada sesion.
 
-- YYYY-MM-DD: 
+- 2026-02-26: Recibidos e integrados primeros videos de servicios (`AudioVisual_v1.mp4`, `MotionGraphics_v1.mp4`). Pendientes IA y e-learning.
 - YYYY-MM-DD: 
 - YYYY-MM-DD: 
