@@ -40,9 +40,13 @@ const isActive = (href: string) => {
           </li>
         ))}
       </ul>
-      <details class="relative md:hidden">
-        <summary class="cursor-pointer list-none rounded-sm px-3 py-1.5 text-xs font-mono text-white/50">
-          MENU
+      <details class="relative md:hidden group">
+        <summary class="cursor-pointer list-none rounded-sm px-3 py-1.5 text-white/70 hover:text-white transition-colors duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu">
+            <line x1="4" x2="20" y1="12" y2="12"/>
+            <line x1="4" x2="20" y1="6" y2="6"/>
+            <line x1="4" x2="20" y1="18" y2="18"/>
+          </svg>
         </summary>
         <div class="absolute right-0 top-full mt-2 w-48 rounded-sm border border-white/10 bg-[#090f1a] p-2 shadow-xl backdrop-blur-xl">
           <ul class="flex flex-col gap-1">
