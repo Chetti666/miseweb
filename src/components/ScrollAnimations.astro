@@ -7,29 +7,70 @@
   if (!reduceMotion) {
     gsap.registerPlugin(ScrollTrigger);
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
+    const headerLogo = document.querySelector('[data-header-logo]');
+    const headerNav = document.querySelector('[data-header-nav]');
     const heroSubtitle = document.querySelector('[data-hero-subtitle]');
-    const heroTitle = document.querySelector('[data-hero-title]');
+    const heroTitleWrapper = document.querySelector('.hero-text-wrapper');
+    const heroTitleWords = document.querySelectorAll('.hero-text-word');
+    const heroDescription = document.querySelector('[data-hero-description]');
     const heroCta = document.querySelector('[data-hero-cta]');
     const heroVisual = document.querySelector('[data-hero-visual]');
 
-    tl.fromTo(heroSubtitle, 
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.7, delay: 0.2 }
-    ).fromTo(heroTitle,
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.9 },
-      '-=0.4'
-    ).fromTo(heroCta,
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6 },
-      '-=0.5'
-    ).fromTo(heroVisual,
-      { scale: 0.9, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 1 },
-      '-=0.6'
-    );
+    const masterTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    
+    // Identificar si estamos en el home y si es la primera visita
+    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+    const isFirstVisit = !sessionStorage.getItem('site_visited');
+
+    // Animar el header SOLO si estamos en el Home O si es la primera vez que se carga la página en esta sesión
+    const shouldAnimateHeader = isHomePage || isFirstVisit;
+
+    if (shouldAnimateHeader && headerLogo && headerNav) {
+      sessionStorage.setItem('site_visited', 'true');
+      masterTl
+        .fromTo(headerLogo,
+          { y: -20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6 }
+        )
+        .fromTo(headerNav,
+          { y: -20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6 },
+          '-=0.4'
+        );
+    } else if (headerLogo && headerNav) {
+      // Si es navegación interna a otras vistas, mostrar inmediatamente
+      gsap.set([headerLogo, headerNav], { y: 0, opacity: 1 });
+    }
+
+    // El offset de la primera animación del Hero depende de si se animó el header
+    const initialOffset = shouldAnimateHeader ? '-=0.4' : '0';
+
+    masterTl
+      .fromTo(heroSubtitle, 
+        { opacity: 0, y: 30, rotationX: -40, scale: 0.9, transformOrigin: 'center bottom' },
+        { opacity: 1, y: 0, rotationX: 0, scale: 1, duration: 0.7 },
+        initialOffset
+      )
+      .fromTo(heroTitleWords,
+        { opacity: 0, y: 40, rotationX: -50, scale: 0.85, transformOrigin: 'center bottom' },
+        { opacity: 1, y: 0, rotationX: 0, scale: 1, duration: 0.8, stagger: 0.08 },
+        '-=0.5'
+      )
+      .fromTo(heroDescription,
+        { opacity: 0, y: 30, rotationX: -40, scale: 0.9, transformOrigin: 'center bottom' },
+        { opacity: 1, y: 0, rotationX: 0, scale: 1, duration: 0.7 },
+        '-=0.6'
+      )
+      .fromTo(heroCta,
+        { opacity: 0, y: 30, rotationX: -40, scale: 0.9, transformOrigin: 'center bottom' },
+        { opacity: 1, y: 0, rotationX: 0, scale: 1, duration: 0.7 },
+        '-=0.6'
+      )
+      .fromTo(heroVisual,
+        { scale: 0.9, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1.0 },
+        '-=0.6'
+      );
 
     document.querySelectorAll('[data-reveal]').forEach((target) => {
       gsap.fromTo(
@@ -70,8 +111,8 @@
     const stats = document.querySelectorAll('[data-stat]');
     stats.forEach((stat) => {
       const value = stat.querySelector('[data-stat-value]');
-      if (value) {
-        const endValue = parseFloat(value.getAttribute('data-end-value')) || 0;
+      if (value instanceof HTMLElement) {
+        const endValue = parseFloat(value.getAttribute('data-end-value') || '0') || 0;
         const suffix = value.getAttribute('data-suffix') || '';
         
         gsap.fromTo(value,
@@ -86,8 +127,11 @@
               start: 'top 85%',
               toggleActions: 'play none none reverse'
             },
-            onUpdate: function() {
-              value.innerText = Math.round(this.targets()[0].innerText) + suffix;
+            onUpdate: function(this: any) {
+              const target = this.targets()[0];
+              if (target instanceof HTMLElement) {
+                value.innerText = Math.round(parseFloat(target.innerText)) + suffix;
+              }
             }
           }
         );
@@ -96,7 +140,7 @@
 
     const parallaxTargets = document.querySelectorAll('[data-parallax]');
     parallaxTargets.forEach((target) => {
-      const speed = parseFloat(target.getAttribute('data-parallax-speed')) || 0.1;
+      const speed = parseFloat(target.getAttribute('data-parallax-speed') || '0.1') || 0.1;
       gsap.to(target, {
         yPercent: -12 * speed,
         ease: 'none',

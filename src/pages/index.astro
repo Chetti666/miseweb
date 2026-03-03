@@ -33,22 +33,35 @@ const process = ['Brief y estrategia', 'Guion visual', 'Edición y motion', 'Rev
   description="Web de presentacion para estudio creativo especializado en edicion de video, identidad visual y contenido para marcas."
 >
   <div class="grain-overlay"></div>
-  <section class="section-shell grid min-h-[80vh] items-center gap-10 py-20 md:grid-cols-[1.15fr_0.85fr]" data-parallax-wrap>
+  <section class="section-shell grid min-h-[80vh] items-center gap-10 py-10 md:grid-cols-[1.15fr_0.85fr]" data-parallax-wrap>
     <div class="space-y-6">
-      <span class="chip" data-hero-subtitle>// VIDEO EDITING + VISUAL DESIGN</span>
-      <h1 class="section-title max-w-2xl text-white" data-hero-title>
-        Transformamos<span class="text-accent"> ideas</span> en piezas visuales que<span class="text-accent-2"> venden</span>.
+      <div class="[perspective:1000px]">
+        <span class="chip inline-block" data-hero-subtitle>// VIDEO EDITING + VISUAL DESIGN</span>
+      </div>
+      <h1 class="section-title max-w-2xl text-white">
+        <span class="hero-text-wrapper inline-block [perspective:1000px]" data-hero-title>
+          <span class="hero-text-word inline-block">Transformamos</span>
+          <span class="text-accent hero-text-word inline-block"> ideas</span>
+          <span class="hero-text-word inline-block"> en piezas</span>
+          <span class="hero-text-word inline-block"> visuales que</span>
+          <span class="text-accent-2 hero-text-word inline-block"> venden</span>
+          <span class="hero-text-word inline-block">.</span>
+        </span>
       </h1>
-      <p class="max-w-xl text-base font-mono text-white/60 leading-relaxed" data-hero-subtitle>
-        Produccion de reels, anuncios y contenido digital con direccion creativa, narrativa dinamica y foco en resultados para marcas y profesionales.
-      </p>
-      <div class="flex flex-wrap gap-3 pt-2" data-hero-cta>
-        <a href="/contacto" class="btn-primary rounded-sm bg-accent px-6 py-3 font-medium text-sm text-base">
-          Solicitar propuesta
-        </a>
-        <a href="/portfolio" class="link-hover rounded-sm px-6 py-3 text-sm font-mono text-white/60">
-          Ver portafolio
-        </a>
+      <div class="[perspective:1000px]">
+        <p class="hero-text-description max-w-xl text-base font-mono text-white/60 leading-relaxed inline-block" data-hero-description>
+          Produccion de reels, anuncios y contenido digital con direccion creativa, narrativa dinamica y foco en resultados para marcas y profesionales.
+        </p>
+      </div>
+      <div class="[perspective:1000px]">
+        <div class="flex flex-wrap gap-3 pt-2 inline-flex" data-hero-cta>
+          <a href="/contacto" class="btn-primary rounded-sm bg-accent px-6 py-3 font-medium text-sm text-base">
+            Solicitar propuesta
+          </a>
+          <a href="/portfolio" class="link-hover rounded-sm px-6 py-3 text-sm font-mono text-white/60">
+            Ver portafolio
+          </a>
+        </div>
       </div>
     </div>
 

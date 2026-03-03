@@ -19,6 +19,10 @@
   box-sizing: border-box;
 }
 
+.perspective-1000 {
+  perspective: 1000px;
+}
+
 html,
 body {
   margin: 0;

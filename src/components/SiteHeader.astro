@@ -19,28 +19,20 @@ const isActive = (href: string) => {
 };
 ---
 
-<header class="sticky top-0 z-50 bg-[#090f1a]/80 backdrop-blur-xl border-b border-white/[0.05]">
-  <div class="mx-auto flex w-[min(1120px,92%)] items-center justify-between py-3">
-    <a href="/" class="flex items-center gap-3 font-display text-lg tracking-wide text-white">
-      <img src="/media/fav_blanco.svg" alt="Isotipo" class="h-16 w-16" loading="eager" />
-      <span class="font-normal tracking-[0.35em]">
-        CG<span class="text-accent">.</span>MOTION
-      </span>
+<header id="site-header" class="sticky top-0 z-50 bg-[#090f1a]/80 backdrop-blur-xl border-b border-white/[0.05]">
+  <div class="mx-auto flex w-[min(1120px,92%)] items-center justify-between py-4 transition-all duration-300 ease-out header-content" data-header-wrapper>
+    <a href="/" class="flex items-center gap-3 font-display text-white group" data-header-logo>
+      <img src="/media/logo_blanco.svg" alt="CG Motion Studio" class="h-12 w-auto transition-all duration-300 ease-out header-logo group-hover:drop-shadow-[0_0_8px_var(--color-accent-2)]" loading="eager" />
     </a>
-    <nav aria-label="Principal">
+    <nav aria-label="Principal" data-header-nav>
       <ul class="hidden items-center gap-1 md:flex">
         {links.map((link) => (
           <li class="relative">
-            {isActive(link.href) && (
-              <span class="pointer-events-none absolute inset-0 rounded-sm bg-accent/20 animate-zoom-in"></span>
-            )}
             <a
               href={link.href}
               class:list={[
-                'relative z-10 rounded-sm px-3.5 py-1.5 text-xs font-medium font-mono tracking-wider transition',
-                isActive(link.href)
-                  ? 'text-accent'
-                  : 'text-white/50 hover:text-white'
+                'relative z-10 rounded-sm px-4 py-2 text-sm font-medium font-mono tracking-wider transition-all duration-300',
+                isActive(link.href) ? 'text-accent font-semibold drop-shadow-[0_0_8px_var(--color-accent)]' : 'text-white/70 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]'
               ]}
             >
               {link.label}
@@ -52,24 +44,51 @@ const isActive = (href: string) => {
         <summary class="cursor-pointer list-none rounded-sm px-3 py-1.5 text-xs font-mono text-white/50">
           MENU
         </summary>
-        <ul class="absolute right-0 mt-2 w-44 space-y-0.5 rounded-lg bg-[#090f1a]/95 backdrop-blur-sm p-1.5">
-          {links.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                class:list={[
-                  'block rounded-sm px-3 py-2 text-xs font-mono transition',
-                  isActive(link.href)
-                    ? 'bg-accent/20 text-accent'
-                    : 'text-white/50 hover:text-white'
-                ]}
-              >
+        <div class="absolute right-0 top-full mt-2 w-48 rounded-sm border border-white/10 bg-[#090f1a] p-2 shadow-xl backdrop-blur-xl">
+          <ul class="flex flex-col gap-1">
+            {links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class:list={[
+                    'block px-4 py-2 text-sm font-mono tracking-wider transition-all duration-300',
+                    isActive(link.href) ? 'text-accent font-semibold drop-shadow-[0_0_8px_var(--color-accent)]' : 'text-white/70 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]'
+                  ]}
+                >
                 {link.label}
               </a>
             </li>
           ))}
         </ul>
-      </details>
+      </div>
+    </details>
+  </nav>
+</div>
     </nav>
   </div>
 </header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const headerContent = header?.querySelector('.header-content') as HTMLElement;
+  const headerLogo = header?.querySelector('.header-logo') as HTMLImageElement;
+
+  const handleScroll = () => {
+    if (!header || !headerContent || !headerLogo) return;
+    
+    if (window.scrollY > 50) {
+      headerContent.style.paddingTop = '0.5rem';
+      headerContent.style.paddingBottom = '0.5rem';
+      headerLogo.style.height = '2.5rem';
+      headerLogo.style.width = 'auto';
+    } else {
+      headerContent.style.paddingTop = '1rem';
+      headerContent.style.paddingBottom = '1rem';
+      headerLogo.style.height = '3rem';
+      headerLogo.style.width = 'auto';
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+</script>
