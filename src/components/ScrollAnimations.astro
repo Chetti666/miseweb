@@ -18,12 +18,8 @@
 
     const masterTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     
-    // Identificar si estamos en el home y si es la primera visita
-    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
-    const isFirstVisit = !sessionStorage.getItem('site_visited');
-
-    // Animar el header SOLO si estamos en el Home O si es la primera vez que se carga la página en esta sesión
-    const shouldAnimateHeader = isHomePage || isFirstVisit;
+    // Animar el header SOLO la primera vez que se carga la página en esta sesión
+    const shouldAnimateHeader = !sessionStorage.getItem('site_visited');
 
     if (shouldAnimateHeader && headerLogo && headerNav) {
       sessionStorage.setItem('site_visited', 'true');
