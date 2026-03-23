@@ -43,39 +43,42 @@
 
     masterTl
       .fromTo(heroSubtitle, 
-        { opacity: 0, y: 30, rotationX: -40, scale: 0.9, transformOrigin: 'center bottom' },
-        { opacity: 1, y: 0, rotationX: 0, scale: 1, duration: 0.7 },
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6 },
         initialOffset
       )
       .fromTo(heroTitleWords,
-        { opacity: 0, y: 40, rotationX: -50, scale: 0.85, transformOrigin: 'center bottom' },
-        { opacity: 1, y: 0, rotationX: 0, scale: 1, duration: 0.8, stagger: 0.08 },
-        '-=0.5'
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.7, stagger: 0.06 },
+        '-=0.4'
       )
       .fromTo(heroDescription,
-        { opacity: 0, y: 30, rotationX: -40, scale: 0.9, transformOrigin: 'center bottom' },
-        { opacity: 1, y: 0, rotationX: 0, scale: 1, duration: 0.7 },
-        '-=0.6'
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        '-=0.5'
       )
       .fromTo(heroCta,
-        { opacity: 0, y: 30, rotationX: -40, scale: 0.9, transformOrigin: 'center bottom' },
-        { opacity: 1, y: 0, rotationX: 0, scale: 1, duration: 0.7 },
-        '-=0.6'
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        '-=0.4'
       )
       .fromTo(heroVisual,
-        { scale: 0.9, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1.0 },
-        '-=0.6'
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.8 },
+        '-=0.5'
       );
 
     document.querySelectorAll('[data-reveal]').forEach((target) => {
+      const isInsideStagger = target.closest('[data-stagger]');
+      if (isInsideStagger) return;
+      
       gsap.fromTo(
         target,
-        { y: 40, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
+          duration: 0.6,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: target,
@@ -89,19 +92,129 @@
     document.querySelectorAll('[data-stagger]').forEach((container) => {
       const children = container.querySelectorAll(':scope > *');
       gsap.fromTo(children,
-        { y: 30, opacity: 0 },
+        { y: 20, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 0.5,
-          stagger: 0.08,
+          stagger: 0.15,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: container,
-            start: 'top 85%'
+            start: 'top 80%'
           }
         }
       );
+      
+      children.forEach((child) => {
+        const revealElements = child.querySelectorAll('[data-reveal]');
+        revealElements.forEach((el) => {
+          gsap.fromTo(
+            el,
+            { y: 15, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.4,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: el,
+                start: 'top 90%',
+                toggleActions: 'play none none reverse'
+              }
+            }
+          );
+        });
+      });
+    });
+
+    // Process steps animation - clean slide + fade with staggered feel
+    document.querySelectorAll('[data-stagger-process]').forEach((container) => {
+      const steps = container.querySelectorAll('[data-process-step]');
+      const line = container.parentElement?.querySelector('.process-line');
+      
+      if (line) {
+        gsap.fromTo(line,
+          { scaleY: 0, transformOrigin: 'top center' },
+          {
+            scaleY: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: container,
+              start: 'top 80%'
+            }
+          }
+        );
+      }
+      
+      const directionOffsets = [
+        { x: -40, rotateY: -15 },
+        { x: 40, rotateY: 15 },
+        { x: -30, rotateY: -10 },
+        { x: 30, rotateY: 10 },
+        { x: -20, rotateY: -8 }
+      ];
+      
+      steps.forEach((step, i) => {
+        const card = step.querySelector('.process-step-card');
+        const numberWrap = step.querySelector('.process-step-number-wrap');
+        const number = step.querySelector('.process-step-number');
+        const text = step.querySelector('.process-step-text');
+        const progress = step.querySelector('.process-progress');
+        
+        const offset = directionOffsets[i % directionOffsets.length];
+        
+        gsap.set(card, {
+          transformPerspective: 1000,
+          transformOrigin: 'center center'
+        });
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: step,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+        
+        tl.fromTo(card,
+          {
+            opacity: 0,
+            x: offset.x,
+            rotateY: offset.rotateY,
+            scale: 0.95
+          },
+          {
+            opacity: 1,
+            x: 0,
+            rotateY: 0,
+            scale: 1,
+            duration: 0.5,
+            ease: 'power2.out'
+          }
+        )
+        .fromTo(numberWrap,
+          { opacity: 0, scale: 0.5 },
+          { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(1.4)' },
+          '-=0.25'
+        )
+        .fromTo(number,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.2 },
+          '-=0.2'
+        )
+        .fromTo(text,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.25, ease: 'power1.out' },
+          '-=0.15'
+        )
+        .fromTo(progress,
+          { scaleX: 0, opacity: 0 },
+          { scaleX: 1, opacity: 1, duration: 0.4, ease: 'power1.out' },
+          '-=0.15'
+        );
+      });
     });
 
     const stats = document.querySelectorAll('[data-stat]');
