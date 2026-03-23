@@ -5,27 +5,53 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
 const services = [
   {
     name: 'Producción Audiovisual',
+    description: [
+      'Creamos contenido audiovisual estratégico para marcas y empresas que buscan comunicar con claridad, captar atención y generar impacto.',
+      'Desarrollamos piezas diseñadas para campañas digitales, redes sociales y comunicación corporativa, combinando dirección creativa, narrativa visual y producción profesional.',
+      'Cada proyecto se adapta al formato y plataforma donde será publicado, optimizando el contenido para lograr mayor alcance, comprensión y resultados.'
+    ],
     video: '/media/AudioVisual_v1.mp4',
-    bullets: ['Reels, ads y piezas hero', 'Adaptaciones por formato/plataforma', 'Versiones A/B para performance']
+    bullets: []
   },
   {
     name: 'Motion Graphics',
+    description: [
+      'Diseñamos animaciones y gráficos en movimiento que ayudan a explicar ideas, reforzar mensajes y darle identidad visual a cada proyecto audiovisual.',
+      'El motion graphics permite transformar información compleja en contenido claro, dinámico y fácil de comprender, ideal para videos corporativos, capacitación, contenido digital y presentaciones de marca.',
+      'Cada animación se desarrolla con un enfoque narrativo y visual que potencia la comunicación y la experiencia del espectador.'
+    ],
     video: '/media/MotionGraphics_v1.mp4',
-    bullets: ['Animación de isotipo y logotipo', 'Sistemas de lower thirds y placas', 'Aperturas y cierres de marca']
+    bullets: []
   },
   {
     name: 'Inteligencia Artificial (IA)',
+    description: [
+      'Utilizamos herramientas de inteligencia artificial para ampliar las posibilidades de la producción audiovisual, creando imágenes, animaciones y secuencias visuales que serían difíciles o costosas de producir con métodos tradicionales.',
+      'La IA nos permite generar conceptos visuales únicos, explorar estilos creativos y desarrollar contenido innovador para proyectos audiovisuales, campañas digitales y piezas experimentales.',
+      'Combinamos creatividad, dirección visual y tecnología para producir contenido que integra lo mejor del diseño audiovisual con las nuevas capacidades de la inteligencia artificial'
+    ],
     video: null,
-    bullets: ['Generación de assets visuales', 'Optimización de flujos de trabajo', 'Integración de herramientas IA']
+    bullets: []
   },
   {
     name: 'E-learning',
+    description: [
+      'Desarrollamos contenido audiovisual para cursos e-learning pensado en mejorar la experiencia de aprendizaje de los estudiantes.',
+      'A través de videos formativos dinámicos, recursos visuales y narrativa clara, transformamos contenidos complejos en material didáctico fácil de comprender y recordar.',
+      'Nuestro enfoque busca mantener la atención del alumno, facilitar la comprensión de los conceptos y generar una experiencia de aprendizaje más atractiva, efectiva y accesible desde cualquier lugar.'
+    ],
     video: null,
-    bullets: ['Edición de cursos online', 'Material didáctico audiovisual', 'Videos formativos dinámicos']
+    bullets: []
   }
 ];
 
-const process = ['Brief y estrategia', 'Guion visual', 'Edición y motion', 'Revisión colaborativa', 'Entrega final'];
+const process = [
+  'Levantamiento de contenido, ideas, objetivos.',
+  'Desarrollo de guion, storyboard, propuestas.',
+  'Desarrollo, grabación, edición, prueba y error.',
+  'Revisión colaborativa cruzada, modificaciones.',
+  'Entrega final, en un periodo de tiempo razonable.'
+];
 ---
 
 <MainLayout
@@ -36,21 +62,22 @@ const process = ['Brief y estrategia', 'Guion visual', 'Edición y motion', 'Rev
   <section class="section-shell grid min-h-[80vh] items-center gap-10 py-10 md:grid-cols-[1.15fr_0.85fr]" data-parallax-wrap>
     <div class="space-y-6">
       <div class="[perspective:1000px]">
-        <span class="chip inline-block" data-hero-subtitle>// VIDEO EDITING + VISUAL DESIGN</span>
+        <span class="chip inline-block" data-hero-subtitle>// PRODUCCIÓN AUDIOVISUAL + CONTENIDO PARA EMPRESAS</span>
       </div>
       <h1 class="section-title max-w-2xl text-white">
         <span class="hero-text-wrapper inline-block [perspective:1000px]" data-hero-title>
           <span class="hero-text-word inline-block">Transformamos</span>
           <span class="text-accent hero-text-word inline-block"> ideas</span>
-          <span class="hero-text-word inline-block"> en piezas</span>
-          <span class="hero-text-word inline-block"> visuales que</span>
-          <span class="text-accent-2 hero-text-word inline-block"> venden</span>
+          <span class="hero-text-word inline-block"> en contenido</span>
+          <span class="hero-text-word inline-block"> audiovisual</span>
+          <span class="hero-text-word inline-block"> que genera</span>
+          <span class="text-accent-2 hero-text-word inline-block"> resultados</span>
           <span class="hero-text-word inline-block">.</span>
         </span>
       </h1>
       <div class="[perspective:1000px]">
         <p class="hero-text-description max-w-xl text-base font-mono text-white/60 leading-relaxed inline-block" data-hero-description>
-          Produccion de reels, anuncios y contenido digital con direccion creativa, narrativa dinamica y foco en resultados para marcas y profesionales.
+          Producción de videos corporativos, contenido para redes, reels publicitarios y piezas audiovisuales diseñadas para comunicar, capacitar y potenciar marcas.
         </p>
       </div>
       <div class="[perspective:1000px]">
@@ -107,13 +134,24 @@ const process = ['Brief y estrategia', 'Guion visual', 'Edición y motion', 'Rev
           </div>
           <div class="w-full md:w-1/2 flex flex-col justify-center">
             <h3 class="mb-4 font-display text-3xl md:text-4xl text-white">{service.name}</h3>
-            <ul class="flex flex-wrap gap-3">
-              {service.bullets.map((bullet) => (
-                <li class="rounded-sm bg-white/5 px-3 py-1.5 text-xs font-mono text-accent-2 border border-white/10">
-                  {bullet}
-                </li>
-              ))}
-            </ul>
+            
+            {service.description && service.description.length > 0 && (
+              <div class="mb-6 flex flex-col gap-4">
+                {service.description.map((paragraph) => (
+                  <p class="text-base md:text-lg text-white/70 leading-relaxed">{paragraph}</p>
+                ))}
+              </div>
+            )}
+
+            {service.bullets && service.bullets.length > 0 && (
+              <ul class="flex flex-wrap gap-3">
+                {service.bullets.map((bullet) => (
+                  <li class="rounded-sm bg-white/5 px-3 py-1.5 text-xs font-mono text-accent-2 border border-white/10">
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       ))}
@@ -121,16 +159,19 @@ const process = ['Brief y estrategia', 'Guion visual', 'Edición y motion', 'Rev
   </section>
 
   <section class="section-shell pb-24" data-reveal>
-    <div class="glass-premium p-5">
-      <p class="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-accent">PROCESO</p>
-      <ol class="mt-4 grid gap-2 md:grid-cols-5" data-stagger>
+    <div class="mb-12">
+      <span class="chip">METODOLOGÍA</span>
+      <h2 class="section-title mt-4 text-white">Nuestro Proceso</h2>
+    </div>
+    
+    <div class="glass-premium p-8 md:p-12">
+      <ol class="flex flex-col gap-6 md:gap-8" data-stagger>
         {process.map((step, index) => (
-          <li class="p-3 text-center relative">
-            <span class="mb-1 block font-display text-xl text-accent-2 tracking-wider">{String(index + 1).padStart(2, '0')}</span>
-            <span class="text-xs font-mono text-white/50">{step}</span>
-            {index < process.length - 1 && (
-              <span class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 text-white/10">→</span>
-            )}
+          <li class="group flex items-start gap-6 border-b border-white/5 pb-6 last:border-0 last:pb-0 transition-all duration-300">
+            <span class="font-display text-3xl text-accent-2 tracking-wider opacity-50 transition-opacity duration-300 group-hover:opacity-100">{String(index + 1).padStart(2, '0')}</span>
+            <div class="flex-1 pt-1.5 md:pt-2">
+              <span class="text-base md:text-lg text-white/70 transition-colors duration-300 group-hover:text-white leading-relaxed">{step}</span>
+            </div>
           </li>
         ))}
       </ol>
