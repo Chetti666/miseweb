@@ -15,6 +15,8 @@
     const heroDescription = document.querySelector('[data-hero-description]');
     const heroCta = document.querySelector('[data-hero-cta]');
     const heroVisual = document.querySelector('[data-hero-visual]');
+    const footer = document.querySelector('[data-footer]');
+    const footerItems = document.querySelectorAll('[data-footer-item]');
 
     const masterTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     
@@ -229,18 +231,14 @@
           {
             innerText: endValue,
             duration: 1.5,
-            snap: { innerText: 1 },
             ease: 'power2.out',
+            snap: { innerText: 1 },
+            onUpdate: function() {
+              value.innerText = Math.round(this.targets()[0].innerText) + suffix;
+            },
             scrollTrigger: {
               trigger: stat,
-              start: 'top 85%',
-              toggleActions: 'play none none reverse'
-            },
-            onUpdate: function(this: any) {
-              const target = this.targets()[0];
-              if (target instanceof HTMLElement) {
-                value.innerText = Math.round(parseFloat(target.innerText)) + suffix;
-              }
+              start: 'top 85%'
             }
           }
         );
@@ -271,5 +269,26 @@
         gsap.to(service, { scale: 1, duration: 0.3, ease: 'power2.out' });
       });
     });
+
+    // Animación del Footer — solo opacity y transform en hijos (GPU-accelerated)
+    if (footer && footerItems.length > 0) {
+      // Estado inicial: footer invisible, hijos desplazados
+      gsap.set(footer, { opacity: 0 });
+      gsap.set(footerItems, { y: 30, opacity: 0 });
+      
+      // Animar con ScrollTrigger - una sola timeline para footer y sus hijos
+      const footerTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: footer,
+          start: 'top 90%', // Se activa cuando casi entra en vista
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      // Aparecer el fondo (solo opacity)
+      footerTl.to(footer, { opacity: 1, duration: 0.8, ease: 'power3.out' })
+      // Elementos internos con stagger (subir y aparecer)
+      .to(footerItems, { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out' }, '-=0.5');
+    }
   }
 </script>
