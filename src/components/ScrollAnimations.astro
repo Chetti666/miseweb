@@ -20,11 +20,8 @@
 
     const masterTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     
-    // Animar el header SOLO la primera vez que se carga la página en esta sesión
-    const shouldAnimateHeader = !sessionStorage.getItem('site_visited');
-
-    if (shouldAnimateHeader && headerLogo && headerNav) {
-      sessionStorage.setItem('site_visited', 'true');
+    // Animar el header CADA VEZ que se carga la página
+    if (headerLogo && headerNav) {
       masterTl
         .fromTo(headerLogo,
           { y: -20, opacity: 0 },
@@ -35,19 +32,13 @@
           { y: 0, opacity: 1, duration: 0.6 },
           '-=0.4'
         );
-    } else if (headerLogo && headerNav) {
-      // Si es navegación interna a otras vistas, mostrar inmediatamente
-      gsap.set([headerLogo, headerNav], { y: 0, opacity: 1 });
     }
-
-    // El offset de la primera animación del Hero depende de si se animó el header
-    const initialOffset = shouldAnimateHeader ? '-=0.4' : '0';
 
     masterTl
       .fromTo(heroSubtitle, 
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6 },
-        initialOffset
+        '-=0.4'
       )
       .fromTo(heroTitleWords,
         { opacity: 0, y: 25 },
