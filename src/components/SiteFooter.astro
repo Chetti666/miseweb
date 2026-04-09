@@ -41,7 +41,13 @@
     {/* Línea divisoria y Copyright */}
     <div class="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/50 md:flex-row" data-footer-item>
       <p>&copy; {new Date().getFullYear()} CG Motion Studio. Todos los derechos reservados.</p>
-      <p>Diseñado para generar impacto.</p>
+      <div class="flex items-center gap-2">
+        <span>Diseñado por</span>
+        <a href="https://github.com/Chetti666" target="_blank" rel="noreferrer" class="flex items-center gap-1.5 text-white/70 hover:text-white transition-colors duration-200">
+          <img src="/media/logo_chetti.png" alt="ChettiDev" class="h-4 w-auto opacity-80" loading="lazy" />
+          <span class="font-semibold tracking-wide">ChettiDev</span>
+        </a>
+      </div>
     </div>
   </div>
 </footer>
