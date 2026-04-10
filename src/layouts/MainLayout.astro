@@ -6,11 +6,13 @@ import SiteFooter from '../components/SiteFooter.astro';
 interface Props {
   title: string;
   description?: string;
+  keywords?: string;
 }
 
 const {
   title,
-  description = 'Estudio creativo especializado en edicion de video, motion y contenido visual para marcas.'
+  description = 'Productora audiovisual en Santiago de Chile. Especialistas en producción de video profesional, motion graphics, videos corporativos y desarrollo de cursos e-learning para empresas.',
+  keywords = 'productora audiovisual, servicios audiovisuales, producción de video profesional, motion graphics, videos corporativos, desarrollo de cursos e-learning, productora audiovisual en Santiago, creación de contenido digital'
 } = Astro.props;
 ---
 
@@ -23,9 +25,12 @@ const {
     <link rel="icon" type="image/svg+xml" href="/media/fav_blanco.svg" media="(prefers-color-scheme: dark)" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CL" />
+    <meta name="robots" content="index, follow" />
     <title>{title}</title>
   </head>
   <body class="bg-base text-ink antialiased">
