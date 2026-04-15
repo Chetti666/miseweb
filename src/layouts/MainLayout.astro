@@ -14,7 +14,7 @@ const {
   title,
   description = 'Productora audiovisual en Santiago de Chile. Especialistas en producción de video profesional, motion graphics, videos corporativos y desarrollo de cursos e-learning para empresas.',
   keywords = 'carlogtz, carlo gtz, carlo gutierrez, productora audiovisual, servicios audiovisuales, producción de video profesional, motion graphics, videos corporativos, desarrollo de cursos e-learning, productora audiovisual en Santiago, creación de contenido digital',
-  image = '/media/logo_blanco.png'
+  image = '/media/isotipo.png'
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.carlogtz.com');
@@ -33,12 +33,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.carl
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Logo de Carlo Gtz" />
+    <meta property="og:site_name" content="Carlo Gtz - Productora Audiovisual" />
     <meta property="og:locale" content="es_CL" />
 
     <!-- Twitter -->
