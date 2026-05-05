@@ -91,17 +91,18 @@ const process = [
       </div>
     </div>
 
-    <div class="relative flex aspect-[9/16] max-h-[560px] items-center justify-center" data-hero-visual>
-      <div class="absolute inset-0 flex items-center justify-center gap-0.5 opacity-25">
-        {[...Array(24)].map((_, i) => (
-          <div class="waveform-bar" style={`height: ${Math.random() * 40 + 20}px; animation-delay: ${i * 0.05}s`}></div>
-        ))}
-      </div>
-      <img src="/media/logo_blanco.svg" alt="CG Motion Studio" class="mx-auto mb-4 w-32 relative z-10 opacity-80 animate-float" loading="lazy" />
-      <p class="text-xs font-mono text-white/40 absolute bottom-8 relative z-10">
-        REEL EN ACTUALIZACION
-      </p>
-    </div>
+<div class="relative flex aspect-[16/9] max-h-[720px] items-center justify-center" data-hero-visual>
+  <video
+    src="/media/reel_home.mp4"
+    class="h-full w-full object-cover opacity-80 transition-opacity duration-500 group-hover:opacity-100"
+    autoplay
+    loop
+    muted
+    playsinline
+    controls
+    class="border-2 border-accent/30 rounded-lg"
+  />
+</div>
   </section>
 
   <section id="servicios" class="section-shell py-20">

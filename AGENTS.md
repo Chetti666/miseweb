@@ -6,7 +6,7 @@
 - **Purpose**: Portfolio website for motion graphics and video editing studio
 - **Language**: Spanish for content, English for code identifiers
 
-## Build Commands
+## Development Commands
 
 | Command | Description |
 |---------|-------------|
@@ -16,12 +16,20 @@
 | `npm run astro check` | Type checking (0 errors target) |
 | `npm run astro -- --help` | View all Astro CLI options |
 
-No test runner, linter, or formatter configured.
+## Testing
+
+No test runner configured. For UI testing, consider:
+- Manual browser testing during development
+- Visual regression testing with tools like Chromatic
+- Adding Vitest or Playwright if automated tests are needed
+
+To run a single test (if test framework added):
+- Vitest: `npx vitest run test/file.test.ts -t "test name"`
+- Playwright: `npx playwright test test/file.test.ts --grep "test name"`
 
 ## Code Style
 
 ### General
-
 - TypeScript strict mode (`extends "astro/tsconfigs/strict"`)
 - Prefer CSS animations over JS for performance
 - 2-space indentation, trailing commas, semicolons in TS
@@ -97,16 +105,13 @@ Every page imports `MainLayout` and `<ScrollAnimations />` at the end.
 
 ### Data Attribute Convention
 Components use `data-*` attributes as a declarative animation API:
-
-| Attribute | Purpose |
-|-----------|---------|
-| `data-header-logo`, `data-header-nav` | Header elements |
-| `data-hero-title`, `data-hero-subtitle`, `data-hero-description`, `data-hero-cta`, `data-hero-visual` | Hero section |
-| `data-reveal` | Scroll-triggered fade-up (`y: 30`, `start: 'top 85%'`) |
-| `data-stagger` | Container with staggered children |
-| `data-stagger-process`, `data-process-step` | Process methodology timeline |
-| `data-footer`, `data-footer-item` | Footer reveal animation |
-| `data-service` | Service card hover scale |
+- `data-header-logo`, `data-header-nav`: Header elements
+- `data-hero-*`: Hero section elements
+- `data-reveal`: Scroll-triggered fade-up
+- `data-stagger`: Container with staggered children
+- `data-stagger-process`, `data-process-step`: Process timeline
+- `data-footer`, `data-footer-item`: Footer reveal animation
+- `data-service`: Service card hover scale
 
 ### ScrollTrigger Pattern
 ```typescript
@@ -118,13 +123,11 @@ gsap.fromTo(el,
 ```
 
 ### Accessibility
-Wrap all animations in `prefers-reduced-motion` check:
 ```typescript
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 ```
 
 ### Session-Based Animation Gating
-Use `sessionStorage` to run animations only once per session:
 ```typescript
 if (!sessionStorage.getItem('site_visited')) { /* animate */ }
 sessionStorage.setItem('site_visited', 'true');
@@ -138,21 +141,18 @@ sessionStorage.setItem('site_visited', 'true');
 - `@import "tailwindcss"` and `@import "tailwind-animations"` in `global.css`
 
 ### CSS Variables
-| Variable | Value | Purpose |
-|----------|-------|---------|
-| `--color-base` | `#090f1a` | Background (dark navy) |
-| `--color-surface` | `#121b2b` | Card backgrounds |
-| `--color-accent` | `#53e1d1` | Primary accent (cyan) |
-| `--color-accent-2` | `#f2b66d` | Secondary accent (gold) |
-| `--color-ink` | `#f3f8ff` | Text (off-white) |
-| `--color-ink-dim` | `rgba(243,248,255,0.5)` | Dimmed text |
+- `--color-base`: `#090f1a` (Background)
+- `--color-surface`: `#121b2b` (Card backgrounds)
+- `--color-accent`: `#53e1d1` (Primary accent)
+- `--color-accent-2`: `#f2b66d` (Secondary accent)
+- `--color-ink`: `#f3f8ff` (Text)
+- `--color-ink-dim`: `rgba(243,248,255,0.5)` (Dimmed text)
 
-### Custom Utility Classes
-`.section-shell`, `.section-title`, `.glass-card`, `.glass-premium`, `.chip`,
-`.btn-primary`, `.link-hover`, `.text-gradient`, `.card-glow`, `.noise-layer`,
-`.grain-overlay`, `.timeline-bar`, `.waveform-bar`, `.stagger-children`,
-`.frame-indicator`, `.text-accent`, `.text-accent-2`, `.bg-accent`,
-`.decoration-accent`, `.font-display`, `.perspective-1000`
+### Key Utilities
+`.section-shell`, `.section-title`, `.glass-card`, `.btn-primary`, `.link-hover`,
+`.text-gradient`, `.card-glow`, `.noise-layer`, `.grain-overlay`,
+`.stagger-children`, `.frame-indicator`, `.text-accent`, `.bg-accent`,
+`.font-display`, `.perspective-1000`
 
 ### Keyframe Animations
 `fade-up`, `fade-in`, `scale-in`, `float`, `glow-pulse`, `shimmer`,
@@ -162,16 +162,14 @@ sessionStorage.setItem('site_visited', 'true');
 Use `min()` for containers: `width: min(1120px, 92%)`
 
 ## Layout & Page Conventions
-
 - `MainLayout.astro` is the only active layout; `Layout.astro` is legacy/unused
 - Dual favicon with `prefers-color-scheme` media queries
 - Film grain overlay: `.noise-layer` (CSS) + `.grain-overlay` (SVG turbulence)
-- Video previews use `<video autoplay loop muted playsinline>`
-- Mobile menu uses native `<details>/<summary>` (zero-JS)
+- Video previews: `<video autoplay loop muted playsinline>`
+- Mobile menu: native `<details>/<summary>` (zero-JS)
 - `Welcome.astro` is unused scaffold; safe to remove
 
 ## SEO & Accessibility
-
 - Semantic HTML: `<header>`, `<nav>`, `<main>`, `<footer>`, `<article>`
 - Open Graph tags: `og:title`, `og:description`, `og:type`
 - Alt attributes on all images; `loading="lazy"` for below-fold media

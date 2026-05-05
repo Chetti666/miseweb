@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
 @import "tailwindcss";
 @import "tailwind-animations";
 
@@ -6,12 +6,16 @@
   --font-display: "Bebas Neue", "Avenir Next", sans-serif;
   --font-mono: "JetBrains Mono", "SF Mono", "Consolas", monospace;
   --font-sans: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+  --font-serif: "Playfair Display", "Georgia", serif;
   --color-base: #090f1a;
   --color-surface: #121b2b;
   --color-accent: #53e1d1;
   --color-accent-2: #f2b66d;
+  --color-accent-3: #ff6b9d;
   --color-ink: #f3f8ff;
   --color-ink-dim: rgba(243, 248, 255, 0.5);
+  --color-film-strip: #1a1a1a;
+  --color-film-highlight: #2d2d2d;
   color-scheme: dark;
 }
 
@@ -186,11 +190,48 @@ body {
   50% { border-color: rgba(83, 225, 209, 0.6); }
 }
 
+@keyframes film-countdown {
+  0% { opacity: 0; transform: translateY(-10px); }
+  20% { opacity: 1; transform: translateY(0); }
+  80% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+
+@keyframes lens-flare {
+  0%, 100% { opacity: 0; transform: translateX(-100%) rotate(45deg); }
+  50% { opacity: 0.7; transform: translateX(100%) rotate(45deg); }
+}
+
+@keyframes projector-flicker {
+  0%, 100% { opacity: 1; }
+  5% { opacity: 0.85; }
+  10% { opacity: 0.95; }
+  15% { opacity: 0.9; }
+  20% { opacity: 1; }
+  25% { opacity: 0.9; }
+  30% { opacity: 0.8; }
+}
+
+@keyframes film-grain-animation {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
 .animate-fade-up { animation: fade-up 0.6s ease-out forwards; }
 .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
 .animate-scale-in { animation: scale-in 0.5s ease-out forwards; }
 .animate-float { animation: float 3s ease-in-out infinite; }
 .animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+.animate-film-countdown { animation: film-countdown 3s ease-in-out infinite; }
+.animate-lens-flare { animation: lens-flare 6s ease-in-out infinite; }
+.animate-projector-flicker { animation: projector-flicker 4s ease-in-out infinite; }
+.animate-film-grain { animation: film-grain-animation 20s linear infinite; }
+.animate-marquee { animation: marquee 15s linear infinite; }
 
 /* Premium Glass */
 .glass-premium {
@@ -293,4 +334,146 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Cinematic elements */
+.film-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.film-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.3) 0px,
+      rgba(0,0,0,0.3) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.3) 0px,
+      rgba(0,0,0,0.3) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.film-matte {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 18%;
+  background: linear-gradient(to bottom, #0000, #0008);
+  pointer-events: none;
+}
+
+.film-matte-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 12%;
+  background: linear-gradient(to top, #0000, #0008);
+  pointer-events: none;
+}
+
+.film-gate {
+  position: absolute;
+  inset: 0;
+  border: 4px solid rgba(255,255,255,0.1);
+  pointer-events: none;
+}
+
+.projector-beam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(ellipse at center, rgba(83,225,209,0.15) 0%, transparent 70%);
+  transform: translate(-50%, -50%) rotate(45deg);
+  pointer-events: none;
+  animation: projector-flicker 4s ease-in-out infinite;
+}
+
+.lens-flare-element {
+  position: absolute;
+  width: 120px;
+  height: 20px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  filter: blur(8px);
+  pointer-events: none;
+  animation: lens-flare 6s ease-in-out infinite;
+}
+
+.film-leader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 8px;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      #000 0px,
+      #000 4px,
+      #fff 4px,
+      #fff 8px
+    );
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 15s linear infinite;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
+/* Enhanced glass effect */
+.glass-cinematic {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-cinematic::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.glass-cinematic:hover::before {
+  transform: translateX(100%);
+}
+
+.glass-cinematic:hover {
+  box-shadow: 0 0 40px rgba(83, 225, 209, 0.2), 0 0 60px rgba(83, 225, 209, 0.1);
+  transform: translateY(-3px);
+  border-color: rgba(83, 225, 209, 0.25);
 }
