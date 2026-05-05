@@ -481,3 +481,8 @@ body {
   transform: translateY(-3px);
   border-color: rgba(83, 225, 209, 0.25);
 }
+
+video::-webkit-media-controls-panel {
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 100%);
+  padding-top: 10px;
+}
