@@ -31,14 +31,18 @@ html,
 body {
   margin: 0;
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
   font-family: var(--font-sans);
-  background:
-    radial-gradient(circle at 82% 18%, rgb(83 225 209 / 0.15), transparent 32%),
-    radial-gradient(circle at 12% 78%, rgb(242 182 109 / 0.12), transparent 30%),
-    linear-gradient(160deg, #070b14 0%, #101a2b 100%);
+  background-image: url('/media/fondo_home.webp');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #090f1a;
+  min-height: 100vh;
 }
 
 .timeline-bar {
@@ -85,7 +89,7 @@ body {
 }
 
 .section-shell {
-  width: min(1120px, 92%);
+  width: min(1280px, 96%);
   margin-inline: auto;
 }
 
