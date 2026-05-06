@@ -19,8 +19,8 @@ const isActive = (href: string) => {
 };
 ---
 
-<header id="site-header" class="sticky top-0 z-50 bg-[#090f1a]/80 backdrop-blur-xl border-b border-white/[0.05] transition-colors duration-300 ease-out">
-  <div class="mx-auto flex w-[min(1120px,92%)] items-center justify-between py-4 transition-all duration-300 ease-out header-content" data-header-wrapper>
+<header id="site-header" class="sticky top-0 z-50 bg-[#05080e]/80 backdrop-blur-xl border-b border-white/[0.05] transition-colors duration-300 ease-out">
+  <div class="mx-auto flex w-[min(1280px,96%)] items-center justify-between py-4 transition-all duration-300 ease-out header-content" data-header-wrapper>
     <a href="/" class="flex items-center gap-3 font-display text-white group" data-header-logo>
       <img src="/media/logogif.gif" alt="CG Motion Studio" class="h-20 w-auto transition-all duration-300 ease-out header-logo group-hover:drop-shadow-[0_0_8px_var(--color-accent-2)]" loading="eager" />
     </a>
@@ -48,7 +48,7 @@ const isActive = (href: string) => {
             <line x1="4" x2="20" y1="18" y2="18"/>
           </svg>
         </summary>
-        <div class="absolute right-0 top-full mt-2 w-48 rounded-sm border border-white/10 bg-[#090f1a] p-2 shadow-xl backdrop-blur-xl">
+        <div class="absolute right-0 top-full mt-2 w-48 rounded-sm border border-white/10 bg-[#05080e] p-2 shadow-xl backdrop-blur-xl">
           <ul class="flex flex-col gap-1">
             {links.map((link) => (
               <li>
@@ -87,8 +87,8 @@ const isActive = (href: string) => {
       headerLogo.style.width = 'auto';
       
       // Fondo casi completamente transparente manteniendo el blur
-      header.classList.remove('bg-[#090f1a]/80', 'border-b', 'border-white/[0.05]');
-      header.classList.add('bg-[#090f1a]/10', 'shadow-md');
+      header.classList.remove('bg-[#05080e]/80', 'border-b', 'border-white/[0.05]');
+      header.classList.add('bg-[#05080e]/10', 'shadow-md');
     } else {
       headerContent.style.paddingTop = '1rem';
       headerContent.style.paddingBottom = '1rem';
@@ -96,8 +96,8 @@ const isActive = (href: string) => {
       headerLogo.style.width = 'auto';
       
       // Fondo transparente original con borde
-      header.classList.add('bg-[#090f1a]/80', 'border-b', 'border-white/[0.05]');
-      header.classList.remove('bg-[#090f1a]/10', 'shadow-md');
+      header.classList.add('bg-[#05080e]/80', 'border-b', 'border-white/[0.05]');
+      header.classList.remove('bg-[#05080e]/10', 'shadow-md');
     }
   };
 

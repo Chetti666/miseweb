@@ -11,7 +11,7 @@ const services = [
       'Cada proyecto se adapta al formato y plataforma donde será publicado, optimizando el contenido audiovisual para lograr mayor alcance, comprensión y resultados reales para tu negocio en Chile y el mundo.'
     ],
     video: '/media/AudioVisual_v1.mp4',
-    bullets: ['Videos corporativos', 'Videos para empresas', 'Productora audiovisual en Santiago', 'Grabación en terreno']
+    //bullets: ['Videos corporativos', 'Videos para empresas', 'Productora audiovisual en Santiago', 'Grabación en terreno']
   },
   {
     name: 'Motion Graphics y Animación Digital',
@@ -21,7 +21,7 @@ const services = [
       'Cada pieza se desarrolla con un enfoque narrativo y visual que potencia el branding audiovisual, la comunicación y la experiencia del espectador.'
     ],
     video: '/media/MotionGraphics_v1.mp4',
-    bullets: ['Motion graphics', 'Animación digital', 'Animación 2D y 3D', 'Diseño multimedia']
+    //bullets: ['Motion graphics', 'Animación digital', 'Animación 2D y 3D', 'Diseño multimedia']
   },
   {
     name: 'Inteligencia Artificial y Producción Creativa',
@@ -31,7 +31,7 @@ const services = [
       'Combinamos creatividad, dirección técnica y tecnología para producir contenido digital creativo que integra lo mejor del diseño interactivo con las nuevas capacidades tecnológicas.'
     ],
     video: null,
-    bullets: ['Producción de contenido innovador', 'Contenido digital creativo', 'Experiencia audiovisual inmersiva']
+    //bullets: ['Producción de contenido innovador', 'Contenido digital creativo', 'Experiencia audiovisual inmersiva']
   },
   {
     name: 'Desarrollo de Cursos E-learning',
@@ -41,7 +41,7 @@ const services = [
       'Proveemos servicios e-learning para empresas, incluyendo desarrollo de plataformas LMS, UX/UI para e-learning y contenido para formación corporativa que mantiene la atención del alumno.'
     ],
     video: null,
-    bullets: ['Producción de cursos e-learning', 'Videos de capacitación', 'Servicios e-learning para empresas', 'Empresa de e-learning en Chile']
+    bullets: []
   }
 ];
 
@@ -62,30 +62,31 @@ const process = [
   <section class="section-shell grid min-h-[90vh] items-center gap-10 py-20 md:grid-cols-[1fr_1fr]" data-parallax-wrap>
 <div class="space-y-6 text-left">
   <div class="[perspective:1000px]">
-    <span class="chip inline-block" data-hero-subtitle>// PRODUCTORA AUDIOVISUAL EN SANTIAGO DE CHILE</span>
+    <strong class="chip inline-block" data-hero-subtitle>// DISEÑO AUDIOVISUAL & MULTIMEDIA</strong>
   </div>
   <h1 class="section-title max-w-2xl text-white">
     <span class="hero-text-wrapper inline-block [perspective:1000px]" data-hero-title>
-      <span class="hero-text-word inline-block">Productora</span>
-      <span class="text-accent hero-text-word inline-block"> creativa</span>
-      <span class="hero-text-word inline-block"> audiovisual</span>
-      <span class="hero-text-word inline-block"> para</span>
-      <span class="text-accent-2 hero-text-word inline-block"> marcas</span>
-      <span class="hero-text-word inline-block">.</span>
+      <span class="hero-text-word inline-block">diseño visual</span><br>
+      <span class="hero-text-word inline-block">que</span>
+      <span class="text-accent hero-text-word inline-block">cuenta</span>
+      <span class="hero-text-word inline-block">historias</span><br>
+      <span class="hero-text-word inline-block">y genera</span>
+      <span class="text-accent-2 hero-text-word inline-block">impacto.</span>
     </span>
   </h1>
   <div class="[perspective:1000px]">
     <p class="hero-text-description max-w-xl text-base font-mono text-white/60 leading-relaxed inline-block" data-hero-description>
-      Producción de videos corporativos, desarrollo de cursos e-learning, motion graphics y diseño multimedia que generan resultados.
+      Creo piezas audiovisuales, motion graphics y contenido multimedia que conectan ideas con emociones y educación.
+      Desde la estrategia visual hasta el resultado final.
     </p>
   </div>
   <div class="[perspective:1000px]">
     <div class="flex flex-wrap gap-3 pt-2 inline-flex" data-hero-cta>
-      <a href="/contacto" class="btn-primary rounded-sm bg-accent px-6 py-3 font-medium text-sm text-base">
-        Solicitar propuesta
+      <a href="/portfolio" class="btn-primary rounded-sm bg-base px-6 py-3 font-mono text-sm text-base">
+        Ver mi Trabajo
       </a>
-      <a href="/portfolio" class="link-hover rounded-sm px-6 py-3 text-sm font-mono text-white/60">
-        Ver portafolio
+      <a href="/contacto" class="link-hover rounded-sm px-6 py-3 text-sm font-mono text-white/60">
+        Solicitar Propuesta
       </a>
     </div>
   </div>
@@ -94,7 +95,7 @@ const process = [
 <div class="relative flex aspect-[16/9] max-h-[640px] items-center justify-center" data-hero-visual>
   <div class="relative w-full h-full rounded-xl overflow-hidden border-[0.5px] border-[var(--color-accent)] bg-black/50 shadow-2xl shadow-accent/10">
     <div class="absolute top-0 left-0 right-0 z-20 px-4 py-3 bg-gradient-to-b from-black/70 to-transparent flex justify-between items-center">
-      <span class="text-xs font-mono text-accent tracking-wider uppercase">Reel 2025</span>
+      <span class="text-xs font-mono text-accent tracking-wider uppercase">Reel 2026</span>
     </div>
     <video
       src="/media/reel_home.mp4"
@@ -141,7 +142,7 @@ const process = [
 
   <section id="servicios" class="section-shell py-20">
     <div class="mb-16" data-reveal>
-      <span class="chip">SERVICIOS</span>
+      <span class="chip font-mono">SERVICIOS</span>
       <h2 class="section-title mt-4 text-white">Que hacemos</h2>
     </div>
 
@@ -172,7 +173,7 @@ const process = [
             {service.description && service.description.length > 0 && (
               <div class="mb-6 flex flex-col gap-4" data-reveal>
                 {service.description.map((paragraph) => (
-                  <p class="text-base md:text-lg text-white/70 leading-relaxed">{paragraph}</p>
+                  <p class="text-base md:text-lg text-white/70 leading-relaxed font-mono">{paragraph}</p>
                 ))}
               </div>
             )}
@@ -194,7 +195,7 @@ const process = [
 
   <section class="section-shell pb-24" data-reveal>
     <div class="mb-12">
-      <span class="chip">METODOLOGÍA</span>
+      <span class="chip font-mono">METODOLOGÍA</span>
       <h2 class="section-title mt-4 text-white">Nuestro Proceso</h2>
     </div>
     
@@ -218,7 +219,7 @@ const process = [
                 </div>
                 
                 <div class="flex-1 pt-1">
-                  <span class="text-sm md:text-base text-white/70 transition-colors duration-300 group-hover:text-white leading-relaxed block process-step-text">{step}</span>
+                  <span class="text-sm md:text-base text-white/70 transition-colors duration-300 group-hover:text-white leading-relaxed block process-step-text font-mono">{step}</span>
                   <div class="mt-2 h-0.5 w-10 bg-gradient-to-r from-accent to-accent-2 transition-all duration-700 ease-out group-hover:w-16 process-progress"></div>
                 </div>
               </div>

@@ -7,10 +7,10 @@
   --font-mono: "JetBrains Mono", "SF Mono", "Consolas", monospace;
   --font-sans: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
   --font-serif: "Playfair Display", "Georgia", serif;
-  --color-base: #090f1a;
+  --color-base: #05080e;
   --color-surface: #121b2b;
-  --color-accent: #53e1d1;
-  --color-accent-2: #f2b66d;
+  --color-accent: #08bbae;
+  --color-accent-2: #8f1ca9;
   --color-accent-3: #ff6b9d;
   --color-ink: #f3f8ff;
   --color-ink-dim: rgba(243, 248, 255, 0.5);
@@ -41,7 +41,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-color: #090f1a;
+  background-color: #05080e;
   min-height: 100vh;
 }
 
@@ -111,14 +111,13 @@ body {
 .chip {
   display: inline-flex;
   align-items: center;
-  border-radius: 9999px;
-  padding: 0.3rem 0.78rem;
-  font-size: 0.74rem;
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
   font-family: var(--font-mono);
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--color-accent);
-  background: rgba(83 225 209 / 0.08);
 }
 
 .font-display {

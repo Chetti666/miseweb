@@ -101,6 +101,18 @@ const isActive = (href: string) =>
 
 Every page imports `MainLayout` and `<ScrollAnimations />` at the end.
 
+### Custom Video Player
+When implementing custom video controls, use TypeScript and handle null checks:
+```typescript
+const video = document.getElementById('hero-reel') as HTMLVideoElement;
+const playBtn = document.getElementById('play-pause');
+if (video && playBtn) {
+  playBtn.addEventListener('click', () => {
+    video.paused ? video.play() : video.pause();
+  });
+}
+```
+
 ## GSAP Animation System
 
 ### Data Attribute Convention
@@ -168,6 +180,8 @@ Use `min()` for containers: `width: min(1120px, 92%)`
 - Video previews: `<video autoplay loop muted playsinline>`
 - Mobile menu: native `<details>/<summary>` (zero-JS)
 - `Welcome.astro` is unused scaffold; safe to remove
+- Background images use `background-size: 100% 100%; background-attachment: fixed`
+- Video containers: custom controls UI with `.border-[0.5px] border-[var(--color-accent)]`
 
 ## SEO & Accessibility
 - Semantic HTML: `<header>`, `<nav>`, `<main>`, `<footer>`, `<article>`
