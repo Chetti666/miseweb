@@ -36,7 +36,8 @@ body {
 
 body {
   font-family: var(--font-sans);
-  background-image: url('/media/fondo_home.webp');
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url('/media/fondo_home.webp');
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;

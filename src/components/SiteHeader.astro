@@ -85,19 +85,11 @@ const isActive = (href: string) => {
       headerContent.style.paddingBottom = '0.5rem';
       headerLogo.style.height = '2.5rem';
       headerLogo.style.width = 'auto';
-      
-      // Fondo casi completamente transparente manteniendo el blur
-      header.classList.remove('bg-[#05080e]/80', 'border-b', 'border-white/[0.05]');
-      header.classList.add('bg-[#05080e]/10', 'shadow-md');
     } else {
       headerContent.style.paddingTop = '1rem';
       headerContent.style.paddingBottom = '1rem';
       headerLogo.style.height = '3rem';
       headerLogo.style.width = 'auto';
-      
-      // Fondo transparente original con borde
-      header.classList.add('bg-[#05080e]/80', 'border-b', 'border-white/[0.05]');
-      header.classList.remove('bg-[#05080e]/10', 'shadow-md');
     }
   };
 
