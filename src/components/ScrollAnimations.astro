@@ -253,11 +253,13 @@
 
     const services = document.querySelectorAll('[data-service]');
     services.forEach((service) => {
+      const card = service.querySelector('.glass-premium');
+      if (!card) return;
       service.addEventListener('mouseenter', () => {
-        gsap.to(service, { scale: 1.02, duration: 0.3, ease: 'power2.out' });
+        gsap.to(card, { y: -4, scale: 1.01, duration: 0.4, ease: 'power2.out' });
       });
       service.addEventListener('mouseleave', () => {
-        gsap.to(service, { scale: 1, duration: 0.3, ease: 'power2.out' });
+        gsap.to(card, { y: 0, scale: 1, duration: 0.4, ease: 'power2.out' });
       });
     });
 

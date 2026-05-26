@@ -136,50 +136,81 @@ const process = [
       <h2 class="section-title mt-4 text-white">Que hacemos</h2>
     </div>
 
-    <div class="flex flex-col gap-20 md:gap-32" data-stagger>
-      {services.map((service, index) => (
-        <div class={`group flex flex-col items-center gap-8 md:gap-16 ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`} data-service>
-          <div class="w-full md:w-1/2">
-            {service.video ? (
-              <div class="relative aspect-video w-full overflow-hidden rounded-sm bg-white/5">
-                <video
-                  src={service.video}
-                  class="h-full w-full object-cover opacity-70 transition-opacity duration-500 group-hover:opacity-100"
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                />
+    <div class="flex flex-col gap-14 md:gap-20" data-stagger>
+      {services.map((service, index) => {
+        const accentColors = [
+          { rgb: '8,187,174', var: 'var(--color-accent)' },
+          { rgb: '143,28,169', var: 'var(--color-accent-2)' },
+          { rgb: '255,107,157', var: 'var(--color-accent-3)' }
+        ];
+        const accent = accentColors[index % 3];
+        const isReversed = index % 2 !== 0;
+        return (
+          <div class="group relative" data-service>
+            <div class={`glass-premium relative flex flex-col overflow-hidden ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-stretch`}>
+              
+              {/* Background glow bridging both halves */}
+              <div class="absolute inset-0 pointer-events-none transition-opacity duration-700" style={`background: radial-gradient(800px circle at ${isReversed ? '70%' : '30%'} 50%, rgba(${accent.rgb},0.06) 0%, transparent 70%);`}></div>
+              <div class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={`background: radial-gradient(600px circle at ${isReversed ? '70%' : '30%'} 50%, rgba(${accent.rgb},0.12) 0%, transparent 70%);`}></div>
+              
+              {/* Video / Media Side */}
+              <div class="w-full md:w-1/2 relative overflow-hidden">
+                {service.video ? (
+                  <div class="relative aspect-video md:aspect-auto md:h-full w-full overflow-hidden">
+                    <video
+                      src={service.video}
+                      class="h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:opacity-100 group-hover:scale-105"
+                      autoplay
+                      loop
+                      muted
+                      playsinline
+                    />
+                    <div class="absolute inset-0 pointer-events-none mix-blend-overlay transition-opacity duration-500 group-hover:opacity-0" style={`background: linear-gradient(135deg, rgba(${accent.rgb},0.3) 0%, transparent 60%);`}></div>
+                  </div>
+                ) : (
+                  <div class="flex aspect-video md:aspect-auto md:h-full w-full items-center justify-center" style={`background: linear-gradient(135deg, rgba(${accent.rgb},0.1), rgba(255,255,255,0.02));`}>
+                    <span class="font-mono text-sm text-white/40">[Medio no disponible]</span>
+                  </div>
+                )}
               </div>
-            ) : (
-              <div class="flex aspect-video w-full items-center justify-center bg-white/5 rounded-sm">
-                <span class="font-mono text-sm text-white/50">[Medio no disponible]</span>
-              </div>
-            )}
-          </div>
-          <div class="w-full md:w-1/2 flex flex-col justify-center">
-            <h3 class="mb-4 font-display text-3xl md:text-4xl text-white" data-reveal>{service.name}</h3>
-            
-            {service.description && service.description.length > 0 && (
-              <div class="mb-6 flex flex-col gap-4" data-reveal>
-                {service.description.map((paragraph) => (
-                  <p class="text-base md:text-lg text-white/85 leading-relaxed font-mono">{paragraph}</p>
-                ))}
-              </div>
-            )}
+              
+              {/* Accent divider between video and text */}
+              <div class={`hidden md:block absolute ${isReversed ? 'right-1/2' : 'left-1/2'} top-6 bottom-6 w-px opacity-0 group-hover:opacity-100 transition-all duration-500`} style={`background: linear-gradient(to bottom, transparent, rgba(${accent.rgb},0.35), transparent);`}></div>
+              
+              {/* Text Side */}
+              <div class="w-full md:w-1/2 flex flex-col justify-center p-5 md:p-6 lg:p-8 relative">
+                {/* L-corner accent bracket */}
+                <div class={`absolute top-4 ${isReversed ? 'left-4' : 'right-4'} flex flex-col ${isReversed ? 'items-start' : 'items-end'}`}>
+                  <div class="w-6 h-px" style={`background: rgba(${accent.rgb},0.3);`}></div>
+                  <div class="h-6 w-px" style={`background: rgba(${accent.rgb},0.3);`}></div>
+                </div>
+                
+                <h3 class="mb-3 font-display text-2xl md:text-3xl" data-reveal style={`background: linear-gradient(135deg, ${accent.var}, var(--color-ink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;`}>
+                  {service.name}
+                </h3>
+                
+                {service.description && service.description.length > 0 && (
+                  <div class="mb-4 flex flex-col gap-2" data-reveal>
+                    {service.description.map((paragraph) => (
+                      <p class="text-sm md:text-base text-white/85 leading-normal font-mono">{paragraph}</p>
+                    ))}
+                  </div>
+                )}
 
-            {service.bullets && service.bullets.length > 0 && (
-              <ul class="flex flex-wrap gap-3" data-reveal>
-                {service.bullets.map((bullet, i) => (
-                  <li class="rounded-sm bg-white/5 px-3 py-1.5 text-xs font-mono text-accent-2 border border-white/10" style={`transition-delay: ${i * 0.05}s`}>
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
-            )}
+                {service.bullets && service.bullets.length > 0 && (
+                  <ul class="flex flex-wrap gap-3" data-reveal>
+                    {service.bullets.map((bullet, i) => (
+                      <li class="rounded-sm px-3 py-1.5 text-xs font-mono transition-all duration-300 hover:scale-105" style={`background: rgba(${accent.rgb},0.1); border: 1px solid rgba(${accent.rgb},0.25); color: ${accent.var}; transition-delay: ${i * 0.05}s;`}>
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </section>
 
