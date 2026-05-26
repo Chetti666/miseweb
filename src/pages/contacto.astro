@@ -3,10 +3,10 @@ import MainLayout from '../layouts/MainLayout.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
 ---
 
-<MainLayout title="Contacto | Productora Audiovisual en Santiago" description="Contacta a nuestro equipo para cotizar servicios audiovisuales, videos corporativos y desarrollo de cursos e-learning en Chile.">
+<MainLayout title="Contacto | Productora Audiovisual | Carlo Gtz" description="Contacta a nuestro equipo para cotizar servicios audiovisuales, videos corporativos y desarrollo de cursos e-learning en Chile.">
   <section class="section-shell py-14 md:py-12" data-page-enter>
     <span class="chip" data-reveal>Contacto</span>
-    <h1 class="section-title mt-6 max-w-3xl text-white" data-hero-title>Cuentame tu proyecto y en 24 horas te envio una propuesta inicial.</h1>
+    <h1 class="section-title mt-6 max-w-3xl text-white" data-hero-title>Cotiza tu proyecto audiovisual y te envio una propuesta inicial.</h1>
   </section>
 
   <section class="section-shell grid gap-8 pb-20 md:grid-cols-[1.2fr_0.8fr]" data-page-enter>
@@ -19,6 +19,14 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
       </label>
       <label class="text-sm font-mono text-white/90">Tipo de proyecto
         <select name="tipo" class="mt-2 w-full rounded-xl border border-white/20 bg-base px-4 py-3 font-mono text-white outline-none focus:border-[var(--color-accent)]">
+          <option value="">Selecciona un tipo</option>
+          <option value="video">Video Corporativo</option>
+          <option value="motion">Motion Graphics</option>
+          <option value="elearning">Curso E-learning</option>
+          <option value="contenido">Contenido para Redes</option>
+          <option value="otro">Otro</option>
+        </select>
+      </label>
       <label class="text-sm font-mono text-white/90">Mensaje
         <textarea name="mensaje" rows="5" class="mt-2 w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 font-mono text-white outline-none placeholder:text-white/35 focus:border-[var(--color-accent)]" placeholder="Objetivo, plazos y referencias"></textarea>
       </label>

@@ -1,90 +1,41 @@
 # AGENTS.md - Steadfast Shepherd
 
-## Project Overview
+## Project
 
-- **Type**: Astro 5 + Tailwind CSS v4 (Vite plugin) + GSAP + TypeScript (strict)
-- **Purpose**: Portfolio website for motion graphics and video editing studio
-- **Language**: Spanish for content, English for code identifiers
+- **Stack**: Astro 6 + Tailwind CSS v4 (`@tailwindcss/vite` plugin, NOT PostCSS) + GSAP 3 + TypeScript strict
+- **Purpose**: Portfolio for a motion graphics / video editing studio
+- **Language**: Spanish content, English code identifiers
+- **Output**: Static site to `./dist/`; no SSR, no `site` config (`Astro.site` is `undefined` — canonical URL hardcoded in `MainLayout.astro`)
 
-## Development Commands
+## Commands
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server at localhost:4321 |
-| `npm run build` | Build production to ./dist/ |
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Dev server at localhost:4321 |
+| `npm run build` | Production build |
 | `npm run preview` | Preview production build |
-| `npm run astro check` | Type checking (0 errors target) |
-| `npm run astro -- --help` | View all Astro CLI options |
+| `npm run astro check` | TypeScript type check (target 0 errors) |
 
-## Testing
+No test runner, no CI, no pre-commit hooks, no linter/formatter config.
 
-No test runner configured. For UI testing, consider:
-- Manual browser testing during development
-- Visual regression testing with tools like Chromatic
-- Adding Vitest or Playwright if automated tests are needed
+## Architecture
 
-To run a single test (if test framework added):
-- Vitest: `npx vitest run test/file.test.ts -t "test name"`
-- Playwright: `npx playwright test test/file.test.ts --grep "test name"`
-
-## Code Style
-
-### General
-- TypeScript strict mode (`extends "astro/tsconfigs/strict"`)
-- Prefer CSS animations over JS for performance
-- 2-space indentation, trailing commas, semicolons in TS
-- Max line length: 100 characters
-- Arrow functions with parentheses: `(arg) => {}`
-
-### File Organization
+### File Layout
 ```
 src/
-├── components/   # Reusable Astro components
-├── layouts/      # Page layouts (MainLayout.astro is primary)
-├── pages/        # File-based routing (kebab-case filenames)
-└── styles/       # global.css with Tailwind v4 + custom utilities
+  components/   # Astro components (PascalCase)
+  layouts/      # MainLayout.astro (active), Layout.astro (legacy/stale)
+  pages/        # File-based routing (kebab-case filenames)
+  styles/       # global.css — sole stylesheet with Tailwind imports + custom classes
 ```
-Note: `src/utils/` does not exist yet. Logic lives in frontmatter or `<script>` blocks.
+`src/assets/` is empty. `src/utils/` does not exist — logic lives in frontmatter or `<script>` blocks.
 
-### Imports
-Order: Astro built-ins → external libraries → local components → local utils.
-```typescript
-import type { ComponentProps } from 'astro';
-import MainLayout from '../layouts/MainLayout.astro';
-import { gsap } from 'gsap';
-```
+### Component Archetypes
+1. **Pure markup** — No frontmatter, no `<script>` (e.g., `SiteFooter.astro`)
+2. **Hybrid** — Frontmatter + markup + inline `<script>` (e.g., `SiteHeader.astro`, pages)
+3. **Script-only** — No markup, only `<script>` (e.g., `ScrollAnimations.astro`)
 
-### Naming
-- Components: PascalCase (`SiteHeader.astro`, `ScrollAnimations.astro`)
-- Pages: kebab-case (`sobre-mi.astro`, `contacto.astro`)
-- Variables/functions: camelCase
-- Constants: SCREAMING_SNAKE_CASE
-
-### TypeScript
-- Prefer explicit types over `any`; never use `as` assertions
-- Use `interface` for objects, `type` for unions
-- Use optional chaining (`?.`) and nullish coalescing (`??`)
-- Add `@ts-check` to .js/.mjs files for JSDoc type checking
-
-### Error Handling
-- Try/catch for async with meaningful `console.error` messages
-- Provide fallback content for external resources
-- Check `prefers-reduced-motion` before running animations
-
-## Component Patterns
-
-### Frontmatter Props
-```astro
----
-interface Props { title: string; description?: string; }
-const { title, description = '' } = Astro.props;
----
-```
-
-### Conditional Classes
-```astro
-<a href={href} class:list={['base', isActive && 'active']} />
-```
+Every page imports `MainLayout` and `<ScrollAnimations />` at the end.
 
 ### Active Link Detection
 ```typescript
@@ -94,107 +45,68 @@ const isActive = (href: string) =>
   !href.includes('#') && normalizePath(href) === normalizePath(Astro.url.pathname);
 ```
 
-### Component Archetypes
-1. **Pure markup** — No frontmatter, no `<script>` (e.g., `SiteFooter.astro`)
-2. **Hybrid** — Frontmatter + markup + inline `<script>` (e.g., `SiteHeader.astro`)
-3. **Script-only** — Pure `<script>` delivery vehicle, no markup (e.g., `ScrollAnimations.astro`)
+### Mobile Menu
+Uses native `<details>/<summary>` — zero JS.
 
-Every page imports `MainLayout` and `<ScrollAnimations />` at the end.
+### Video Player
+Custom controls in `index.astro`. Uses `as HTMLVideoElement` (despite strict TS convention, this pattern is used in practice for `getElementById`).
 
-### Custom Video Player
-When implementing custom video controls, use TypeScript and handle null checks:
-```typescript
-const video = document.getElementById('hero-reel') as HTMLVideoElement;
-const playBtn = document.getElementById('play-pause');
-if (video && playBtn) {
-  playBtn.addEventListener('click', () => {
-    video.paused ? video.play() : video.pause();
-  });
-}
-```
+### Import Order
+Astro built-ins → external libraries → local components → (future) local utils
 
 ## GSAP Animation System
 
-### Data Attribute Convention
-Components use `data-*` attributes as a declarative animation API:
-- `data-header-logo`, `data-header-nav`: Header elements
-- `data-hero-*`: Hero section elements
-- `data-reveal`: Scroll-triggered fade-up
-- `data-stagger`: Container with staggered children
-- `data-stagger-process`, `data-process-step`: Process timeline
-- `data-footer`, `data-footer-item`: Footer reveal animation
-- `data-service`: Service card hover scale
+Orchestrated by a single `ScrollAnimations.astro` per page. Uses `data-*` attributes as a declarative API:
 
-### ScrollTrigger Pattern
-```typescript
-gsap.fromTo(el,
-  { y: 30, opacity: 0 },
-  { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out',
-    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none reverse' } }
-);
-```
+- `data-hero-*` — hero entrance (master timeline)
+- `data-reveal` — scroll-triggered fade-up (`y: 30, opacity: 0 → y: 0, opacity: 1`, `start: 'top 85%'`, `toggleActions: 'play none none reverse'`)
+- `data-stagger` — container with staggered children (`stagger: 0.15`)
+- `data-stagger-process`, `data-process-step` — process timeline with directional offsets + rotateY
+- `data-stat-value` — numeric counter animation with `gsap.utils.snap`
+- `data-parallax` — parallax scroll via `data-parallax-speed`
+- `data-service` — hover scale (1.02 / 1.0)
+- `data-footer`, `data-footer-item` — scroll-triggered footer reveal
+- `data-header-logo`, `data-header-nav` — header entrance
 
-### Accessibility
+Only `ScrollTrigger` plugin is registered. All animations guard with:
 ```typescript
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 ```
 
-### Session-Based Animation Gating
-```typescript
-if (!sessionStorage.getItem('site_visited')) { /* animate */ }
-sessionStorage.setItem('site_visited', 'true');
-```
-
 ## Tailwind CSS v4
 
-### Configuration
-- Uses `@tailwindcss/vite` Vite plugin (NOT PostCSS)
-- `tailwind-animations` requires `ssr.noExternal` in `astro.config.mjs`
-- `@import "tailwindcss"` and `@import "tailwind-animations"` in `global.css`
+Tailwind imports in `global.css`:
+```css
+@import "tailwindcss";
+@import "tailwind-animations";
+```
+The `tailwind-animations` package requires `ssr.noExternal` in `astro.config.mjs`.
 
-### CSS Variables
-- `--color-base`: `#090f1a` (Background)
-- `--color-surface`: `#121b2b` (Card backgrounds)
-- `--color-accent`: `#53e1d1` (Primary accent)
-- `--color-accent-2`: `#f2b66d` (Secondary accent)
-- `--color-ink`: `#f3f8ff` (Text)
-- `--color-ink-dim`: `rgba(243,248,255,0.5)` (Dimmed text)
+### CSS Variables (from `global.css`, source of truth)
+- `--color-base`: `#05080e`
+- `--color-surface`: `#121b2b`
+- `--color-accent`: `#08bbae` (teal)
+- `--color-accent-2`: `#8f1ca9` (purple)
+- `--color-accent-3`: `#ff6b9d` (pink)
+- `--color-ink`: `#f3f8ff`
+- `--color-ink-dim`: `rgba(243,248,255,0.5)`
+- `--font-display`: `"Bebas Neue"`, `--font-sans`: `"Manrope"`, `--font-mono`: `"JetBrains Mono"`, `--font-serif`: `"Playfair Display"`
 
-### Key Utilities
-`.section-shell`, `.section-title`, `.glass-card`, `.btn-primary`, `.link-hover`,
-`.text-gradient`, `.card-glow`, `.noise-layer`, `.grain-overlay`,
-`.stagger-children`, `.frame-indicator`, `.text-accent`, `.bg-accent`,
-`.font-display`, `.perspective-1000`
+### Key Utility Classes
+`section-shell` (`width: min(1280px, 96%)`), `section-title`, `chip`, `glass-card`, `glass-premium`, `glass-cinematic`, `btn-primary`, `link-hover`, `text-gradient`, `card-glow`, `stagger-children`, `noise-layer`, `grain-overlay`, `frame-indicator`, `film-overlay`, `film-matte`, `film-gate`, `projector-beam`, `lens-flare-element`, `film-leader`, `marquee-container`, `marquee-content`, `timeline-bar`, `waveform-bar`, `perspective-1000`
 
-### Keyframe Animations
-`fade-up`, `fade-in`, `scale-in`, `float`, `glow-pulse`, `shimmer`,
-`text-reveal`, `border-glow`, `timeline-scroll`, `waveform-pulse`
+### CSS Keyframe Animations
+`fade-up`, `fade-in`, `scale-in`, `float`, `glow-pulse`, `shimmer`, `text-reveal`, `border-glow`, `film-countdown`, `lens-flare`, `projector-flicker`, `film-grain-animation`, `marquee`, `timeline-scroll`, `waveform-pulse`
 
-### Responsive Widths
-Use `min()` for containers: `width: min(1120px, 92%)`
+Animation utility classes: `.animate-fade-up`, `.animate-fade-in`, `.animate-scale-in`, `.animate-float`, `.animate-glow-pulse`, `.animate-film-countdown`, `.animate-lens-flare`, `.animate-projector-flicker`, `.animate-film-grain`, `.animate-marquee`
 
-## Layout & Page Conventions
-- `MainLayout.astro` is the only active layout; `Layout.astro` is legacy/unused
-- Dual favicon with `prefers-color-scheme` media queries
-- Film grain overlay: `.noise-layer` (CSS) + `.grain-overlay` (SVG turbulence)
-- Video previews: `<video autoplay loop muted playsinline>`
-- Mobile menu: native `<details>/<summary>` (zero-JS)
-- `Welcome.astro` is unused scaffold; safe to remove
-- Background images use `background-size: 100% 100%; background-attachment: fixed`
-- Video containers: custom controls UI with `.border-[0.5px] border-[var(--color-accent)]`
+## Gotchas
 
-## SEO & Accessibility
-- Semantic HTML: `<header>`, `<nav>`, `<main>`, `<footer>`, `<article>`
-- Open Graph tags: `og:title`, `og:description`, `og:type`
-- Alt attributes on all images; `loading="lazy"` for below-fold media
-- WCAG AA color contrast; `lang="es"` on `<html>`
-
-## Best Practices
-
-1. Run `npm run astro check` — target 0 errors before committing
-2. Run `npm run build` to verify production output
-3. Keep frontmatter concise; extract complex logic to utilities
-4. Minimize client-side JS; prefer CSS animations and `@keyframes`
-5. Register GSAP plugins in `<script>`, not globally
-6. Clean up ScrollTrigger with `ctx.revert()` on unmount
-7. Use `gsap.matchMedia()` for responsive/reduced-motion animations
+- **No `/servicios` page** — the nav link points to `/#servicios` (homepage anchor). A dedicated `/servicios` route does not exist.
+- **Form not connected** — `contacto.astro` has `action="#"`, no backend.
+- **Grain overlay** — `.grain-overlay` (SVG turbulence) is only on `index.astro`, not in `MainLayout`. `.noise-layer` (CSS dots) is in `MainLayout`.
+- **Layout.astro** is legacy/unused. `Welcome.astro` is unused scaffold. Both safe to remove.
+- **No image optimization** — no `@astrojs/image` or `astro:assets` config; images served from `/public/media/`.
+- **No `site` in astro config** — if you need `Astro.site`, set `site:` in `astro.config.mjs`.
+- **All commits by `Chetti666`** — single contributor.
+- **`@ts-check`** — used on `.mjs` config files for JSDoc type checking.
