@@ -37,7 +37,7 @@ body {
 body {
   font-family: var(--font-sans);
   background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url('/media/fondo_home.webp');
+    url('/media/background.webp');
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
