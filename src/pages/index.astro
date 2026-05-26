@@ -32,16 +32,6 @@ const services = [
     ],
     video: null,
     //bullets: ['Producción de contenido innovador', 'Contenido digital creativo', 'Experiencia audiovisual inmersiva']
-  },
-  {
-    name: 'Desarrollo de Cursos E-learning',
-    description: [
-      'Somos especialistas en producción de cursos e-learning y creación de contenido educativo digital, pensado para mejorar la experiencia de aprendizaje corporativo.',
-      'A través de videos formativos dinámicos, producción de cápsulas educativas y diseño instruccional multimedia, transformamos contenidos complejos en material didáctico efectivo y accesible.',
-      'Proveemos servicios e-learning para empresas, incluyendo desarrollo de plataformas LMS, UX/UI para e-learning y contenido para formación corporativa que mantiene la atención del alumno.'
-    ],
-    video: null,
-    bullets: []
   }
 ];
 
@@ -75,7 +65,7 @@ const process = [
     </span>
   </h1>
   <div class="[perspective:1000px]">
-    <p class="hero-text-description max-w-xl text-base font-mono text-white/60 leading-relaxed inline-block" data-hero-description>
+    <p class="hero-text-description max-w-xl text-base font-mono text-white/80 leading-relaxed inline-block" data-hero-description>
       Creo piezas audiovisuales, motion graphics y contenido multimedia que conectan ideas con emociones y educación.
       Desde la estrategia visual hasta el resultado final.
     </p>
@@ -85,7 +75,7 @@ const process = [
       <a href="/portfolio" class="btn-primary rounded-sm bg-base px-6 py-3 font-mono text-sm text-base">
         Ver mi Trabajo
       </a>
-      <a href="/contacto" class="link-hover rounded-sm px-6 py-3 text-sm font-mono text-white/60">
+      <a href="/contacto" class="link-hover rounded-sm px-6 py-3 text-sm font-mono text-white/80">
         Solicitar Propuesta
       </a>
     </div>
@@ -132,8 +122,8 @@ const process = [
       </div>
       
       <div class="flex items-center justify-between mt-1">
-        <span id="time-current" class="text-xs font-mono text-white/60">0:00</span>
-        <span id="time-duration" class="text-xs font-mono text-white/60">0:00</span>
+        <span id="time-current" class="text-xs font-mono text-white/80">0:00</span>
+        <span id="time-duration" class="text-xs font-mono text-white/80">0:00</span>
       </div>
     </div>
   </div>
@@ -163,7 +153,7 @@ const process = [
               </div>
             ) : (
               <div class="flex aspect-video w-full items-center justify-center bg-white/5 rounded-sm">
-                <span class="font-mono text-sm text-white/30">[Medio no disponible]</span>
+                <span class="font-mono text-sm text-white/50">[Medio no disponible]</span>
               </div>
             )}
           </div>
@@ -173,7 +163,7 @@ const process = [
             {service.description && service.description.length > 0 && (
               <div class="mb-6 flex flex-col gap-4" data-reveal>
                 {service.description.map((paragraph) => (
-                  <p class="text-base md:text-lg text-white/70 leading-relaxed font-mono">{paragraph}</p>
+                  <p class="text-base md:text-lg text-white/85 leading-relaxed font-mono">{paragraph}</p>
                 ))}
               </div>
             )}
@@ -219,7 +209,7 @@ const process = [
                 </div>
                 
                 <div class="flex-1 pt-1">
-                  <span class="text-sm md:text-base text-white/70 transition-colors duration-300 group-hover:text-white leading-relaxed block process-step-text font-mono">{step}</span>
+                  <span class="text-sm md:text-base text-white/85 transition-colors duration-300 group-hover:text-white leading-relaxed block process-step-text font-mono">{step}</span>
                   <div class="mt-2 h-0.5 w-10 bg-gradient-to-r from-accent to-accent-2 transition-all duration-700 ease-out group-hover:w-16 process-progress"></div>
                 </div>
               </div>

@@ -11,32 +11,26 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
 
   <section class="section-shell grid gap-8 pb-20 md:grid-cols-[1.2fr_0.8fr]" data-page-enter>
     <form class="glass-card grid gap-4 p-6 md:p-8" action="#" method="post" data-reveal>
-      <label class="text-sm text-white/80">Nombre
-        <input type="text" name="nombre" class="mt-2 w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none placeholder:text-white/35 focus:border-[var(--color-accent)]" placeholder="Tu nombre" />
+      <label class="text-sm font-mono text-white/90">Nombre
+        <input type="text" name="nombre" class="mt-2 w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 font-mono text-white outline-none placeholder:text-white/35 focus:border-[var(--color-accent)]" placeholder="Tu nombre" />
       </label>
-      <label class="text-sm text-white/80">Correo
-        <input type="email" name="email" class="mt-2 w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none placeholder:text-white/35 focus:border-[var(--color-accent)]" placeholder="hola@marca.com" />
+      <label class="text-sm font-mono text-white/90">Correo
+        <input type="email" name="email" class="mt-2 w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 font-mono text-white outline-none placeholder:text-white/35 focus:border-[var(--color-accent)]" placeholder="hola@marca.com" />
       </label>
-      <label class="text-sm text-white/80">Tipo de proyecto
-        <select name="tipo" class="mt-2 w-full rounded-xl border border-white/20 bg-base px-4 py-3 text-white outline-none focus:border-[var(--color-accent)]">
-          <option>Producción de video profesional</option>
-          <option>Desarrollo de cursos e-learning</option>
-          <option>Motion graphics / Animación</option>
-          <option>Servicios audiovisuales en general</option>
-        </select>
+      <label class="text-sm font-mono text-white/90">Tipo de proyecto
+        <select name="tipo" class="mt-2 w-full rounded-xl border border-white/20 bg-base px-4 py-3 font-mono text-white outline-none focus:border-[var(--color-accent)]">
+      <label class="text-sm font-mono text-white/90">Mensaje
+        <textarea name="mensaje" rows="5" class="mt-2 w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 font-mono text-white outline-none placeholder:text-white/35 focus:border-[var(--color-accent)]" placeholder="Objetivo, plazos y referencias"></textarea>
       </label>
-      <label class="text-sm text-white/80">Mensaje
-        <textarea name="mensaje" rows="5" class="mt-2 w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none placeholder:text-white/35 focus:border-[var(--color-accent)]" placeholder="Objetivo, plazos y referencias"></textarea>
-      </label>
-      <button type="submit" class="mt-2 rounded-full bg-accent px-5 py-3 font-semibold text-left transition hover:brightness-110">Enviar briefing</button>
+      <button type="submit" class="mt-2 rounded-full bg-accent px-5 py-3 font-mono font-semibold text-left transition hover:brightness-110">Enviar briefing</button>
     </form>
 
     <aside class="space-y-4" data-reveal>
       <article class="glass-card p-6">
         <h2 class="font-display text-2xl text-white">Contacto directo</h2>
-        <p class="mt-2 text-white/75">Carlo Alberto Gutiérrez Salazar</p>
-        <p class="text-white/75">carlogtz@gmail.com</p>
-        <p class="text-white/75">+569-48558736</p>
+        <p class="mt-2 font-mono text-white/85">Carlo Alberto Gutiérrez Salazar</p>
+        <p class="font-mono text-white/85">carlogtz@gmail.com</p>
+        <p class="font-mono text-white/85">+569-48558736</p>
       </article>
     </aside>
   </section>

@@ -32,7 +32,7 @@ const isActive = (href: string) => {
               href={link.href}
               class:list={[
                 'relative z-10 rounded-sm px-4 py-2 text-sm font-medium font-mono tracking-wider transition-all duration-300',
-                isActive(link.href) ? 'text-accent font-semibold drop-shadow-[0_0_8px_var(--color-accent)]' : 'text-white/70 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]'
+                isActive(link.href) ? 'text-accent font-semibold drop-shadow-[0_0_8px_var(--color-accent)]' : 'text-white/85 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]'
               ]}
             >
               {link.label}
@@ -41,7 +41,7 @@ const isActive = (href: string) => {
         ))}
       </ul>
       <details class="relative md:hidden group">
-        <summary class="cursor-pointer list-none rounded-sm px-3 py-1.5 text-white/70 hover:text-white transition-colors duration-300">
+        <summary class="cursor-pointer list-none rounded-sm px-3 py-1.5 text-white/85 hover:text-white transition-colors duration-300">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu">
             <line x1="4" x2="20" y1="12" y2="12"/>
             <line x1="4" x2="20" y1="6" y2="6"/>
@@ -56,7 +56,7 @@ const isActive = (href: string) => {
                   href={link.href}
                   class:list={[
                     'block px-4 py-2 text-sm font-mono tracking-wider transition-all duration-300',
-                    isActive(link.href) ? 'text-accent font-semibold drop-shadow-[0_0_8px_var(--color-accent)]' : 'text-white/70 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]'
+                    isActive(link.href) ? 'text-accent font-semibold drop-shadow-[0_0_8px_var(--color-accent)]' : 'text-white/85 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]'
                   ]}
                 >
                 {link.label}
