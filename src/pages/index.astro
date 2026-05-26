@@ -221,36 +221,46 @@ const process = [
     </div>
     
     <div class="relative pl-4 md:pl-12" style="perspective: 1200px;">
-      <div class="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-accent/40 via-accent-2/40 to-accent/40 hidden md:block process-line"></div>
+      <div class="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-accent/40 via-accent-2/40 to-accent-3/40 via-accent/40 hidden md:block process-line"></div>
       <ol class="flex flex-col gap-2 md:gap-3" data-stagger-process>
-        {process.map((step, index) => (
+        {process.map((step, index) => {
+          const accentColors = [
+            { rgb: '8,187,174', var: 'var(--color-accent)', name: 'accent' },
+            { rgb: '143,28,169', var: 'var(--color-accent-2)', name: 'accent-2' },
+            { rgb: '255,107,157', var: 'var(--color-accent-3)', name: 'accent-3' }
+          ];
+          const accent = accentColors[index % 3];
+          const isEven = index % 2 === 0;
+          return (
           <li class="group relative" data-process-step data-step-index={index}>
             <div class={[
-              'glass-card relative overflow-hidden p-4 md:p-5 transition-all duration-500 border-l-2 border-white/10 group-hover:border-accent/60 process-step-card',
-              index % 2 === 0 ? 'mr-4 md:mr-16' : 'ml-4 md:ml-16'
-            ].join(' ')} style="perspective: 800px;">
-              <div class="absolute top-0 right-0 w-20 h-20 bg-accent/5 rounded-full blur-xl group-hover:bg-accent/10 transition-all duration-500"></div>
-              <div class="absolute bottom-0 left-0 w-16 h-16 bg-accent-2/5 rounded-full blur-lg group-hover:bg-accent-2/10 transition-all duration-500"></div>
+              'glass-card relative overflow-hidden p-4 md:p-5 transition-all duration-500 border-l-2 border-white/10 process-step-card',
+              isEven ? 'mr-4 md:mr-16' : 'ml-4 md:ml-16'
+            ].join(' ')} style={`perspective: 800px; --step-accent: ${accent.var}; --step-accent-rgb: ${accent.rgb};`}>
+              <div class="absolute inset-0 pointer-events-none transition-opacity duration-500 opacity-0 group-hover:opacity-100" style={`background: radial-gradient(600px circle at ${isEven ? '80%' : '20%'} 50%, rgba(${accent.rgb},0.08) 0%, transparent 70%);`}></div>
+              <div class="absolute top-0 right-0 w-20 h-20 rounded-full blur-xl opacity-30 transition-all duration-500" style={`background: rgba(${accent.rgb},0.15);`}></div>
+              <div class="absolute bottom-0 left-0 w-16 h-16 rounded-full blur-lg opacity-20 transition-all duration-500" style={`background: rgba(${accent.rgb},0.12);`}></div>
               
               <div class="relative z-10 flex items-start gap-3 md:gap-4">
-                <div class="relative flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-lg bg-white/5 border border-white/10 transition-all duration-500 group-hover:border-accent/50 group-hover:bg-accent/10 process-step-number-wrap" style="perspective: 400px;">
-                  <span class="font-display text-lg text-accent-2 transition-all duration-500 group-hover:text-accent group-hover:scale-110 process-step-number">{String(index + 1)}</span>
-                  <div class="absolute inset-0 rounded-lg bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
-                  <div class="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 process-step-glow" style="background: radial-gradient(circle at center, rgba(6,182,212,0.25) 0%, transparent 70%);"></div>
+                <div class="relative flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 transition-all duration-500 process-step-number-wrap group-hover:scale-110" style={`background: rgba(${accent.rgb},0.08); border-color: rgba(${accent.rgb},0.25);`}>
+                  <span class="font-display text-lg transition-all duration-500 process-step-number" style={`color: ${accent.var};`}>{String(index + 1)}</span>
+                  <div class="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" style={`background: rgba(${accent.rgb},0.2);`}></div>
+                  <div class="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 process-step-glow" style={`background: radial-gradient(circle at center, rgba(${accent.rgb},0.3) 0%, transparent 70%);`}></div>
                 </div>
                 
                 <div class="flex-1 pt-1">
-                  <span class="text-sm md:text-base text-white/85 transition-colors duration-300 group-hover:text-white leading-relaxed block process-step-text font-mono">{step}</span>
-                  <div class="mt-2 h-0.5 w-10 bg-gradient-to-r from-accent to-accent-2 transition-all duration-700 ease-out group-hover:w-16 process-progress"></div>
+                  <span class="text-sm md:text-base leading-relaxed block process-step-text font-mono transition-colors duration-300 group-hover:text-white" style="color: rgba(243, 248, 255, 0.85);">{step}</span>
+                  <div class="mt-2 h-0.5 w-10 transition-all duration-700 ease-out group-hover:w-16 process-progress" style={`background: linear-gradient(90deg, ${accent.var}, rgba(${accent.rgb},0.4));`}></div>
                 </div>
               </div>
               
-              <div class="absolute -left-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-surface border-2 border-white/20 hidden md:flex items-center justify-center process-dot">
-                <div class="w-2 h-2 rounded-full bg-accent-2/50 group-hover:bg-accent group-hover:scale-125 transition-all duration-300"></div>
+              <div class="absolute -left-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-white/20 hidden md:flex items-center justify-center process-dot" style="background: var(--color-surface);">
+                <div class="w-2 h-2 rounded-full transition-all duration-300 group-hover:scale-125" style={`background: rgba(${accent.rgb},0.5);`}></div>
               </div>
             </div>
           </li>
-        ))}
+          );
+        })}
       </ol>
     </div>
   </section>
