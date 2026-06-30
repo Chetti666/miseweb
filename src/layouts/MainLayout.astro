@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 interface Props {
   title: string;
@@ -110,6 +111,8 @@ const websiteSchema = {
       <slot />
     </main>
     <SiteFooter />
+
+    <WhatsAppButton />
 
     <script>
       import { inject } from '@vercel/analytics';
