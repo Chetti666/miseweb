@@ -17,17 +17,17 @@ const {
   image = '/media/isotipo.png'
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.carlogtz.com');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.carlogtz.cl');
 
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://www.carlogtz.com/#organization",
+  "@id": "https://www.carlogtz.cl/#organization",
   "name": "Carlo Gtz",
-  "url": "https://www.carlogtz.com",
+  "url": "https://www.carlogtz.cl",
   "logo": {
     "@type": "ImageObject",
-    "url": "https://www.carlogtz.com/media/isotipo.png",
+    "url": "https://www.carlogtz.cl/media/isotipo.png",
     "width": 1200,
     "height": 630
   },
@@ -46,12 +46,12 @@ const organizationSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": "https://www.carlogtz.com/#website",
-  "url": "https://www.carlogtz.com",
+  "@id": "https://www.carlogtz.cl/#website",
+  "url": "https://www.carlogtz.cl",
   "name": "Carlo Gtz - Productora Audiovisual",
   "description": "Productora audiovisual en Santiago de Chile. Especialistas en producción de video profesional, motion graphics, videos corporativos y desarrollo de cursos e-learning.",
   "publisher": {
-    "@id": "https://www.carlogtz.com/#organization"
+    "@id": "https://www.carlogtz.cl/#organization"
   },
   "inLanguage": "es-CL"
 };

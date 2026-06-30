@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.carlogtz.com/sitemap-index.xml
+Sitemap: https://www.carlogtz.cl/sitemap-index.xml
