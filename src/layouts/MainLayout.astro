@@ -25,6 +25,7 @@ const organizationSchema = {
   "@id": "https://www.carlogtz.cl/#organization",
   "name": "Carlo Gtz",
   "url": "https://www.carlogtz.cl",
+  "description": "Productora audiovisual en Santiago de Chile. Especialistas en producción de video profesional, motion graphics, videos corporativos y desarrollo de cursos e-learning.",
   "logo": {
     "@type": "ImageObject",
     "url": "https://www.carlogtz.cl/media/isotipo.png",
@@ -39,7 +40,11 @@ const organizationSchema = {
     "telephone": "+56-9-4855-8736",
     "contactType": "customer service",
     "email": "carlogtz@gmail.com",
-    "availableLanguage": ["Spanish"]
+    "availableLanguage": ["Spanish", "es-CL"]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "CL"
   }
 };
 
@@ -58,13 +63,14 @@ const websiteSchema = {
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es-CL">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/media/fav_negro.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/media/fav_blanco.svg" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="es-CL" href={canonicalURL} />
     
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />

@@ -2,6 +2,18 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
 
+const collectionPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Portafolio - Carlo Gtz",
+  "description": "Portafolio de proyectos audiovisuales: edición de video, motion graphics, comerciales y contenido digital.",
+  "url": "https://www.carlogtz.cl/portfolio",
+  "isPartOf": {
+    "@id": "https://www.carlogtz.cl/#website"
+  },
+  "inLanguage": "es-CL"
+};
+
 const projects = [
   { title: 'Launch Reel / Moda Urbana', type: 'Social Ads', result: '+4.1M visualizaciones', tone: 'Energetico' },
   { title: 'Brand Film / Estudio Arquitectura', type: 'Branding', result: '+62% retencion', tone: 'Cinematico' },
@@ -45,5 +57,6 @@ const projects = [
     </div>
   </section>
 
+  <script type="application/ld+json" set:html={JSON.stringify(collectionPageSchema)} is:inline />
   <ScrollAnimations />
 </MainLayout>

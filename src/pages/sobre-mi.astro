@@ -1,6 +1,24 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Carlo Gtz",
+  "givenName": "Carlo",
+  "familyName": "Gutiérrez Salazar",
+  "email": "carlogtz@gmail.com",
+  "telephone": "+56-9-4855-8736",
+  "jobTitle": "Diseñador Audiovisual y Multimedia",
+  "url": "https://www.carlogtz.cl/sobre-mi",
+  "sameAs": [
+    "https://www.youtube.com/@carlogtz"
+  ],
+  "worksFor": {
+    "@id": "https://www.carlogtz.cl/#organization"
+  }
+};
 ---
 
 <MainLayout title="Sobre mí | Carlo Gtz | Diseñador Audiovisual & Multimedia" description="Diseñador audiovisual y multimedia en Santiago. Especialista en edición de video profesional, motion design y UX/UI para e-learning.">
@@ -47,5 +65,6 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
     </div>
   </section>
 
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
   <ScrollAnimations />
 </MainLayout>
