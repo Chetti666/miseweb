@@ -10,7 +10,8 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
   </section>
 
   <section class="section-shell grid gap-8 pb-20 md:grid-cols-[1.2fr_0.8fr]" data-page-enter>
-    <form class="glass-card grid gap-4 p-6 md:p-8" action="#" method="post" data-reveal>
+    <form class="glass-card grid gap-4 p-6 md:p-8" action="/enviar.php" method="POST" data-reveal>
+      
       <label class="text-sm font-mono text-white/90">Nombre
         <input type="text" name="nombre" class="mt-2 w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 font-mono text-white outline-none placeholder:text-white/35 focus:border-[var(--color-accent)]" placeholder="Tu nombre" />
       </label>
