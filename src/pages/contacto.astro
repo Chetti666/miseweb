@@ -10,7 +10,10 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
   </section>
 
   <section class="section-shell grid gap-8 pb-20 md:grid-cols-[1.2fr_0.8fr]" data-page-enter>
-    <form class="glass-card grid gap-4 p-6 md:p-8" action="/enviar.php" method="POST" data-reveal>
+    <form class="glass-card grid gap-4 p-6 md:p-8" action="/api/contact" method="POST" data-reveal>
+      
+      <!-- Mensaje de estado dinámico -->
+      <div id="status-message" class="hidden rounded-xl p-4 font-mono text-sm"></div>
       
       <label class="text-sm font-mono text-white/90">Nombre
         <input type="text" name="nombre" class="mt-2 w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 font-mono text-white outline-none placeholder:text-white/35 focus:border-[var(--color-accent)]" placeholder="Tu nombre" />
@@ -45,4 +48,29 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
   </section>
 
   <ScrollAnimations />
+
+  <script>
+    // Detectar parámetros de éxito/error al enviar el formulario
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    const msg = urlParams.get('msg');
+    const statusMessage = document.getElementById('status-message');
+
+    if (statusMessage) {
+      if (status === 'success') {
+        statusMessage.textContent = '¡Mensaje enviado con éxito! Te contactaremos pronto.';
+        statusMessage.classList.remove('hidden');
+        statusMessage.classList.add('bg-[rgba(8,187,174,0.1)]', 'border', 'border-[rgba(8,187,174,0.3)]', 'text-[var(--color-accent)]');
+        // Limpiar URL para que no se reenvíe al recargar
+        window.history.replaceState({}, document.title, window.location.pathname);
+      } else if (status === 'error') {
+        statusMessage.textContent = msg === 'missing_fields'
+          ? 'Por favor, completa todos los campos obligatorios.'
+          : 'Hubo un error al enviar el mensaje. Intenta de nuevo o escríbenos directamente.';
+        statusMessage.classList.remove('hidden');
+        statusMessage.classList.add('bg-[rgba(255,107,157,0.1)]', 'border', 'border-[rgba(255,107,157,0.3)]', 'text-[var(--color-accent-3)]');
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    }
+  </script>
 </MainLayout>
