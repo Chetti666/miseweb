@@ -1,0 +1,115 @@
+---
+// ContactModal.astro
+---
+
+<!-- Botón flotante para abrir el modal -->
+<button 
+  id="open-modal-btn"
+  class="fixed top-24 md:top-28 right-6 z-40 flex items-center gap-2.5 rounded-full border border-white/10 bg-[#05080e]/85 p-3 px-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-all duration-300 hover:border-[#08bbae]/40 hover:shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_20px_rgba(8,187,174,0.25)] hover:-translate-y-0.5 group cursor-pointer"
+  aria-label="Abrir formulario de cotización"
+>
+  <!-- Luz de estado pulsante -->
+  <span class="relative flex h-2 w-2">
+    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#08bbae] opacity-75"></span>
+    <span class="relative inline-flex h-2 w-2 rounded-full bg-[#08bbae]"></span>
+  </span>
+
+  <!-- Icono de Mensaje / Cotización -->
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="18" 
+    height="18" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    stroke-width="2.2" 
+    stroke-linecap="round" 
+    stroke-linejoin="round" 
+    class="text-[#08bbae] transition-transform duration-300 group-hover:scale-110"
+  >
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+
+  <span class="font-mono text-xs font-semibold uppercase tracking-wider text-white/85 transition-colors duration-300 group-hover:text-white">
+    Cotizar
+  </span>
+</button>
+
+<!-- Modal de Contacto/Cotización -->
+<dialog id="contact-dialog" class="backdrop:bg-black/85 backdrop:backdrop-blur-sm bg-transparent border-0 p-0 m-0 max-w-full max-h-full w-full h-full z-50">
+  <div class="flex h-full w-full items-center justify-center">
+    <div class="glass-card w-[92%] max-w-lg p-6 md:p-8 relative max-h-[90vh] overflow-y-auto border border-white/10 bg-[#05080e]/95 shadow-2xl flex flex-col gap-4">
+    <!-- Botón para cerrar -->
+    <button 
+      id="close-modal-btn" 
+      type="button"
+      class="absolute top-4 right-4 z-10 flex items-center justify-center text-white/60 hover:text-white transition-colors p-2 cursor-pointer" 
+      aria-label="Cerrar modal"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <div>
+      <span class="chip text-[10px] font-mono">// CONTACTO RÁPIDO</span>
+      <h2 class="font-display text-2xl md:text-3xl text-white mt-2">Cotizar proyecto</h2>
+    </div>
+
+    <!-- Formulario idéntico al de contacto, apunta al backend seguro -->
+    <form class="grid gap-4" action="/api/contact" method="POST">
+      <label class="text-xs font-mono text-white/90">Nombre
+        <input required type="text" name="nombre" class="mt-1 w-full rounded-xl border border-white/25 bg-white/5 px-3.5 py-2.5 text-sm font-mono text-white outline-none placeholder:text-white/30 focus:border-[var(--color-accent)]" placeholder="Tu nombre" />
+      </label>
+      
+      <label class="text-xs font-mono text-white/90">Correo
+        <input required type="email" name="email" class="mt-1 w-full rounded-xl border border-white/25 bg-white/5 px-3.5 py-2.5 text-sm font-mono text-white outline-none placeholder:text-white/30 focus:border-[var(--color-accent)]" placeholder="hola@marca.com" />
+      </label>
+      
+      <label class="text-xs font-mono text-white/90">Tipo de proyecto
+        <select required name="tipo" class="mt-1 w-full rounded-xl border border-white/25 bg-[#05080e] px-3.5 py-2.5 text-sm font-mono text-white outline-none focus:border-[var(--color-accent)]">
+          <option value="">Selecciona un tipo</option>
+          <option value="video">Video Corporativo</option>
+          <option value="motion">Motion Graphics</option>
+          <option value="elearning">Curso E-learning</option>
+          <option value="contenido">Contenido para Redes</option>
+          <option value="otro">Otro</option>
+        </select>
+      </label>
+      
+      <label class="text-xs font-mono text-white/90">Mensaje
+        <textarea required name="mensaje" rows="4" class="mt-1 w-full rounded-xl border border-white/25 bg-white/5 px-3.5 py-2.5 text-sm font-mono text-white outline-none placeholder:text-white/30 focus:border-[var(--color-accent)]" placeholder="Objetivo, plazos y referencias"></textarea>
+      </label>
+      
+      <button type="submit" class="mt-2 rounded-full bg-accent px-5 py-3 font-mono text-sm font-semibold text-center text-[#05080e] transition hover:brightness-110 cursor-pointer">Enviar briefing</button>
+    </form>
+  </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('contact-dialog') as HTMLDialogElement;
+  const openBtn = document.getElementById('open-modal-btn');
+  const closeBtn = document.getElementById('close-modal-btn');
+
+  if (dialog && openBtn && closeBtn) {
+    openBtn.addEventListener('click', () => {
+      dialog.showModal();
+      document.body.style.overflow = 'hidden'; // Bloquea el scroll del fondo
+    });
+
+    closeBtn.addEventListener('click', () => {
+      dialog.close();
+      document.body.style.overflow = '';
+    });
+
+    // Cerrar el modal al hacer clic en el backdrop de fondo
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) {
+        dialog.close();
+        document.body.style.overflow = '';
+      }
+    });
+  }
+</script>

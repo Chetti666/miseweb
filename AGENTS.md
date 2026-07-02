@@ -1,42 +1,49 @@
-# AGENTS.md — Steadfast Shepherd
-
-## Project
+# Steadfast Shepherd
 
 - **Stack**: Astro 6 + Tailwind CSS v4 (`@tailwindcss/vite`, NOT PostCSS) + GSAP 3.14 + TypeScript strict
 - **Purpose**: Portfolio for Carlo Gtz — motion graphics / video editing studio, Santiago Chile
 - **Language**: Spanish content, English code identifiers
-- **Output**: Static site to `./dist/`; `site: 'https://www.carlogtz.cl'` set in `astro.config.mjs`
-- **Sitemap**: `@astrojs/sitemap` integration is active; `robots.txt` references `sitemap-index.xml`
+- **Output**: Static site to `./dist/`; `site: 'https://www.carlogtz.cl'` in `astro.config.mjs`
+- **Analytics**: `@vercel/analytics` injected in `MainLayout.astro`
+- **Sitemap**: `@astrojs/sitemap` active; `robots.txt` references `sitemap-index.xml`
 
 ## Commands
 
 | Command | Purpose |
 |---------|---------|
-| `npm run dev` | Dev server at localhost:4321 |
+| `npm run dev` | Dev server at `localhost:4321` |
 | `npm run build` | Production build |
 | `npm run preview` | Preview production build |
-| `npm run astro check` | TypeScript type check (target 0 errors) |
+| `npx @astrojs/check` | TypeScript type check |
 
-No test runner, no CI, no pre-commit hooks, no linter/formatter config.
+No test runner, CI, pre-commit hooks, linter, or formatter.
+
+## Backend
+
+Contact form at `/contacto` POSTs to `/api/contact` — a Vercel Serverless Function (`api/contact.js`) using `nodemailer`. Env vars `SMTP_USER` and `SMTP_PASSWORD` required at runtime. A PHP fallback (`public/enviar.php`) exists for cPanel hosting but is inactive on Vercel.
 
 ## Architecture
 
-### File Layout
 ```
 src/
   components/   # Astro components (PascalCase)
   layouts/      # MainLayout.astro (active), Layout.astro (legacy/stale)
-  pages/        # File-based routing (kebab-case filenames)
+  pages/        # File-based routing: index, portfolio, sobre-mi, contacto
   styles/       # global.css — sole stylesheet
+api/
+  contact.js    # Vercel Serverless Function (nodemailer)
+public/
+  media/        # Videos, images, GIFs (no astro:assets)
+  enviar.php    # PHP mail fallback
 ```
 
 ### Gotchas
+
 - **No `/servicios` page** — nav link `/#servicios` anchors to homepage section
-- **No backend** — `contacto.astro` form has `action="#"`
 - **Mobile menu** — native `<details>/<summary>`, zero JS
 - **No image optimization** — files served from `/public/media/`, no `@astrojs/image` or `astro:assets`
 - **`.noise-layer`** (CSS dots) in `MainLayout`; **`.grain-overlay`** (SVG turbulence) only on `index.astro`
-- **`Layout.astro`** and **`Welcome.astro`** are legacy/unused
+- **`Layout.astro`**, **`Welcome.astro`**, **`WhatsAppButton.astro`** — legacy/unused
 - **Google verification** at `/google9c48faa7d8c2e48d.html`
 - **`@ts-check`** on `.mjs` config files for JSDoc type checking
 
