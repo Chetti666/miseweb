@@ -13,23 +13,25 @@ interface Props {
 
 const {
   title,
-  description = 'Productora audiovisual en Santiago de Chile. Especialistas en producción de video profesional, motion graphics, videos corporativos y desarrollo de cursos e-learning para empresas.',
+  description = 'Motion graphics, producción de video profesional y contenido multimedia en Santiago, Chile. Especialistas en diseño audiovisual estratégico para marcas y empresas.',
   keywords = 'carlogtz, carlo gtz, carlo gutierrez, productora audiovisual, servicios audiovisuales, producción de video profesional, motion graphics, videos corporativos, desarrollo de cursos e-learning, productora audiovisual en Santiago, creación de contenido digital',
   image = '/media/isotipo.png'
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.carlogtz.cl');
 
+const siteBase = 'https://www.carlogtz.cl';
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://www.carlogtz.cl/#organization",
+  "@id": `${siteBase}/#organization`,
   "name": "Carlo Gtz",
-  "url": "https://www.carlogtz.cl",
+  "url": siteBase,
   "description": "Productora audiovisual en Santiago de Chile. Especialistas en producción de video profesional, motion graphics, videos corporativos y desarrollo de cursos e-learning.",
   "logo": {
     "@type": "ImageObject",
-    "url": "https://www.carlogtz.cl/media/isotipo.png",
+    "url": `${siteBase}/media/isotipo.png`,
     "width": 1200,
     "height": 630
   },
@@ -45,21 +47,79 @@ const organizationSchema = {
   },
   "address": {
     "@type": "PostalAddress",
+    "addressLocality": "Santiago",
+    "addressRegion": "Región Metropolitana",
     "addressCountry": "CL"
   }
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${siteBase}/#localbusiness`,
+  "name": "Carlo Gtz",
+  "description": "Motion graphics, producción de video profesional y contenido multimedia en Santiago, Chile.",
+  "url": siteBase,
+  "telephone": "+56-9-4855-8736",
+  "email": "carlogtz@gmail.com",
+  "image": `${siteBase}/media/isotipo.png`,
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Santiago",
+    "addressRegion": "Región Metropolitana",
+    "addressCountry": "CL"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -33.4489,
+    "longitude": -70.6693
+  },
+  "areaServed": { "@type": "Country", "name": "Chile" },
+  "sameAs": ["https://www.youtube.com/@carlogtz"],
+  "parentOrganization": { "@id": `${siteBase}/#organization` }
 };
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": "https://www.carlogtz.cl/#website",
-  "url": "https://www.carlogtz.cl",
+  "@id": `${siteBase}/#website`,
+  "url": siteBase,
   "name": "Carlo Gtz - Productora Audiovisual",
   "description": "Productora audiovisual en Santiago de Chile. Especialistas en producción de video profesional, motion graphics, videos corporativos y desarrollo de cursos e-learning.",
   "publisher": {
-    "@id": "https://www.carlogtz.cl/#organization"
+    "@id": `${siteBase}/#organization`
   },
   "inLanguage": "es-CL"
+};
+
+const breadcrumbLabels: Record<string, string> = {
+  '/': 'Inicio',
+  '/portfolio': 'Portafolio',
+  '/sobre-mi': 'Sobre mí',
+  '/contacto': 'Contacto'
+};
+
+const breadcrumbItems = [];
+const path = Astro.url.pathname;
+breadcrumbItems.push({
+  "@type": "ListItem",
+  "position": 1,
+  "name": "Inicio",
+  "item": siteBase
+});
+if (path !== '/') {
+  breadcrumbItems.push({
+    "@type": "ListItem",
+    "position": 2,
+    "name": breadcrumbLabels[path] || path.slice(1).replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+    "item": `${siteBase}${path}`
+  });
+}
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbItems
 };
 ---
 
@@ -72,6 +132,7 @@ const websiteSchema = {
     <link rel="icon" type="image/svg+xml" href="/media/fav_blanco.svg" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href={canonicalURL} />
     <link rel="alternate" hreflang="es-CL" href={canonicalURL} />
+    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
     
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
@@ -101,7 +162,9 @@ const websiteSchema = {
     <title>{title}</title>
 
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} is:inline />
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} is:inline />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} is:inline />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
   </head>
   <body class="bg-base text-ink antialiased min-h-screen">
     <div class="noise-layer" aria-hidden="true"></div>

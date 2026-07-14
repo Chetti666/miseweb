@@ -5,6 +5,7 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
 const services = [
   {
     name: 'Producción de Video Profesional',
+    idName: 'video-profesional',
     description: [
       'Creamos contenido visual estratégico para marcas que buscan comunicar con claridad, captar atención y generar impacto mediante servicios audiovisuales de alta calidad.',
       'Desarrollamos piezas diseñadas para campañas digitales, redes sociales y videos corporativos, combinando dirección creativa, storytelling audiovisual y producción profesional en terreno y estudio.',
@@ -15,6 +16,7 @@ const services = [
   },
   {
     name: 'Motion Graphics y Animación Digital',
+    idName: 'motion-graphics',
     description: [
       'Diseñamos animaciones 2D y 3D, motion design y gráficos en movimiento que ayudan a explicar ideas complejas, reforzar mensajes y darle identidad visual a cada proyecto multimedia.',
       'La animación digital permite transformar información en contenido claro, dinámico y fácil de comprender, ideal para videos de capacitación empresarial, contenido digital y presentaciones de marca.',
@@ -25,6 +27,7 @@ const services = [
   },
   {
     name: 'Inteligencia Artificial y Producción Creativa',
+    idName: 'ia-produccion-creativa',
     description: [
       'Utilizamos herramientas de inteligencia artificial para ampliar las posibilidades de la productora creativa audiovisual, creando imágenes, animaciones y secuencias que potencian la narrativa visual.',
       'La IA nos permite generar conceptos únicos, explorar estilos creativos y desarrollar producción de contenido innovador para proyectos audiovisuales, campañas digitales y experiencias inmersivas.',
@@ -42,32 +45,59 @@ const process = [
   'Revisión colaborativa cruzada, modificaciones.',
   'Entrega final, en un periodo de tiempo razonable.'
 ];
+
+const serviceSchemas = services.map((s) => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: s.name,
+  description: s.description[0],
+  provider: { "@id": "https://www.carlogtz.cl/#organization" },
+  areaServed: { "@type": "Country", name: "Chile" },
+  serviceType: s.name,
+  url: `https://www.carlogtz.cl/#${s.idName}`
+}));
+
+const serviceListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Servicios audiovisuales",
+  description: "Servicios de producción audiovisual, motion graphics y contenido digital en Chile.",
+  url: "https://www.carlogtz.cl/",
+  numberOfItems: services.length,
+  itemListElement: services.map((s, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: s.name,
+    url: `https://www.carlogtz.cl/#${s.idName}`
+  }))
+};
 ---
 
 <MainLayout
-  title="Productora Audiovisual & Video Profesional | Carlo Gtz"
-  description="Servicios audiovisuales en Chile. Especialistas en videos corporativos, motion graphics, desarrollo de cursos e-learning y creación de contenido digital."
+  title="Motion Graphics & Video Profesional en Chile | Carlo Gtz"
+  description="Motion graphics, producción de video profesional y contenido multimedia en Santiago, Chile. Creamos piezas audiovisuales estratégicas para marcas y proyectos digitales."
 >
   <div class="grain-overlay"></div>
   <section class="section-shell grid min-h-[90vh] items-center gap-10 py-20 md:grid-cols-[1fr_1fr]" data-parallax-wrap>
 <div class="space-y-6 text-left">
   <div class="[perspective:1000px]">
-    <strong class="chip inline-block" data-hero-subtitle>// DISEÑO AUDIOVISUAL & MULTIMEDIA</strong>
+    <strong class="chip inline-block" data-hero-subtitle>// MOTION GRAPHICS & VIDEO PROFESIONAL EN CHILE</strong>
   </div>
   <h1 class="section-title max-w-2xl text-white">
     <span class="hero-text-wrapper inline-block [perspective:1000px]" data-hero-title>
-      <span class="hero-text-word inline-block">diseño visual</span><br>
-      <span class="hero-text-word inline-block">que</span>
-      <span class="text-accent hero-text-word inline-block">cuenta</span>
+      <span class="hero-text-word inline-block">Motion</span>
+      <span class="hero-text-word inline-block">Graphics</span><br>
+      <span class="text-accent hero-text-word inline-block">que</span>
+      <span class="hero-text-word inline-block">cuentan</span>
       <span class="hero-text-word inline-block">historias</span><br>
-      <span class="hero-text-word inline-block">y genera</span>
-      <span class="text-accent-2 hero-text-word inline-block">impacto.</span>
+      <span class="hero-text-word inline-block">en</span>
+      <span class="text-accent-2 hero-text-word inline-block">Chile.</span>
     </span>
   </h1>
   <div class="[perspective:1000px]">
     <p class="hero-text-description max-w-xl text-base font-mono text-white/80 leading-relaxed inline-block" data-hero-description>
-      Creo piezas audiovisuales, motion graphics y contenido multimedia que conectan ideas con emociones y educación.
-      Desde la estrategia visual hasta el resultado final.
+      Creo motion graphics, videos profesionales y contenido multimedia en Santiago, Chile.
+      Diseño audiovisual estratégico que conecta ideas con emociones y educación.
     </p>
   </div>
   <div class="[perspective:1000px]">
@@ -357,4 +387,8 @@ const process = [
     }
   }
 </script>
+  {serviceSchemas.map((schema) => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+  ))}
+  <script type="application/ld+json" set:html={JSON.stringify(serviceListSchema)} is:inline />
 </MainLayout>
