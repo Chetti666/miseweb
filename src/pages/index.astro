@@ -2,7 +2,15 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import ScrollAnimations from '../components/ScrollAnimations.astro';
 
-const services = [
+interface ServiceItem {
+  name: string;
+  idName: string;
+  description: string[];
+  video: string | null;
+  bullets: string[];
+}
+
+const services: ServiceItem[] = [
   {
     name: 'Producción de Video Profesional',
     idName: 'video-profesional',
@@ -12,7 +20,7 @@ const services = [
       'Cada proyecto se adapta al formato y plataforma donde será publicado, optimizando el contenido audiovisual para lograr mayor alcance, comprensión y resultados reales para tu negocio en Chile y el mundo.'
     ],
     video: '/media/AudioVisual_v1.mp4',
-    //bullets: ['Videos corporativos', 'Videos para empresas', 'Productora audiovisual en Santiago', 'Grabación en terreno']
+    bullets: ['Videos corporativos', 'Videos para empresas', 'Productora audiovisual en Santiago', 'Grabación en terreno']
   },
   {
     name: 'Motion Graphics y Animación Digital',
@@ -23,7 +31,7 @@ const services = [
       'Cada pieza se desarrolla con un enfoque narrativo y visual que potencia el branding audiovisual, la comunicación y la experiencia del espectador.'
     ],
     video: '/media/MotionGraphics_v1.mp4',
-    //bullets: ['Motion graphics', 'Animación digital', 'Animación 2D y 3D', 'Diseño multimedia']
+    bullets: ['Motion graphics', 'Animación digital', 'Animación 2D y 3D', 'Diseño multimedia']
   },
   {
     name: 'Inteligencia Artificial y Producción Creativa',
@@ -34,7 +42,7 @@ const services = [
       'Combinamos creatividad, dirección técnica y tecnología para producir contenido digital creativo que integra lo mejor del diseño interactivo con las nuevas capacidades tecnológicas.'
     ],
     video: null,
-    //bullets: ['Producción de contenido innovador', 'Contenido digital creativo', 'Experiencia audiovisual inmersiva']
+    bullets: ['Producción de contenido innovador', 'Contenido digital creativo', 'Experiencia audiovisual inmersiva']
   }
 ];
 
